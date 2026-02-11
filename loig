@@ -1,25 +1,95 @@
-private fun heartbeat(lastSeen: AtomicLong, session: WebSocketSession): Flux<WebSocketMessage> =
-        Flux.interval(Duration.ofSeconds(30))
-            .flatMap {
-                val now = System.currentTimeMillis()
-                val timeSinceLastSeen = now - lastSeen.get()
+import { closeSocket, openSocket, pong, setMessages, setError } from '../redux/user-notifications/user-notifications-slice';
 
-                if (timeSinceLastSeen >= 90_000) {
-                    log.warn("Session {} timed out (no activity for {}ms). Closing.",
-                        session.id, timeSinceLastSeen)
-                    BroadcastRegistry.unregister(session.id)
-                    session.close().subscribe()
-                    Mono.empty<WebSocketMessage>()
-                } else {
-                    log.debug("Sending PING to session {}", session.id)
-                    val ping = session.textMessage(WsMessage.ping().toJson())
-                    session.send(Mono.just(ping))
-                        .doOnError { e ->
-                            log.warn("Failed to send ping to {}: {}", session.id, e.message)
-                            BroadcastRegistry.unregister(session.id)
-                            session.close().subscribe()
-                        }
-                        .subscribe()
-                    Mono.just(ping)
-                }
-            }
+const userNotificationsApiMiddleware = () => {
+  let socket;
+
+  const onOpen = (store) => (event) => {
+    console.log('websocket open', event.target.url);
+    store.dispatch(openSocket());
+  };
+
+  const onClose = (store) => (event) => {
+    console.log('websocket close', event);
+    store.dispatch(closeSocket());
+  };
+
+  const onMessage = (store) => (event) => {
+    const payload = JSON.parse(event.data);
+    console.log('receiving server message', payload);
+
+    if (payload.type === 'ping') {
+      store.dispatch(pong());
+      return;
+    }
+
+    if (payload.type === 'error') {
+      store.dispatch(setError(payload.message));
+      return;
+    } else {
+      // store.dispatch(setError(''));
+    }
+
+    if (payload.type === 'data') {
+      console.log('pushing Audit', payload.data);
+      store.dispatch(setMessages(payload.data));
+      return;
+    }
+  };
+
+  const onError = (store) => (event) => {
+    const payload = JSON.parse(event.data ? event.data : 'no error data');
+    console.log('receiving server error', payload, event);
+    store.dispatch(setError(payload));
+  };
+
+  return (store) => (next) => (action) => {
+    if (!action.type.includes('userNotificationsSlice')) {
+      return next(action);
+    }
+
+    switch (action.type) {
+      case 'userNotificationsSlice/pong':
+        console.log('ws pong');
+        socket.send(JSON.stringify({ type: 'ping' }));
+        break;
+
+      case 'userNotificationsSlice/connect':
+        console.log('ws connecting', socket);
+        if (!socket || socket.readyState !== WebSocket.OPEN) {
+          const url = location.hostname.includes('localhost')
+            ? 'ws://' + location.hostname + ':8080/poirot/ws/notifications'
+            : 'wss://' + location.hostname + '/poirot/notifications/ws/feed';
+          socket = new WebSocket(url);
+        }
+        socket.onopen = () => {
+          onOpen(store);
+          socket.send(JSON.stringify({ type: 'subscribe' }));
+        }
+        socket.onclose = onClose(store);
+        socket.onmessage = onMessage(store);
+        socket.onerror = onError(store);
+        break;
+
+      // case 'userNotificationsSlice/subscribe':
+      //   console.log('ws sending', action.payload);
+      //   if (socket && socket.readyState === WebSocket.OPEN) {
+      //     // socket.send(JSON.stringify({ type: 'subscribe', data: action.payload }));
+      //     socket.send(JSON.stringify({ type: 'subscribe' }));
+      //   }
+      //   break;
+      case 'userNotificationsSlice/clean':
+        console.log('ws cleaning', socket);
+        if (socket && socket.readyState === WebSocket.OPEN) {
+          console.log('ws cleaning true');
+
+          socket.close();
+        }
+        break;
+      default:
+        console.log('ws the next action:', action);
+        next(action);
+    }
+  };
+};
+
+export const userNotificationsMiddleware = userNotificationsApiMiddleware();
