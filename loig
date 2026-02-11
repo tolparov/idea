@@ -1,33 +1,25 @@
-в консоли событие
-code 1006
+private fun heartbeat(lastSeen: AtomicLong, session: WebSocketSession): Flux<WebSocketMessage> =
+        Flux.interval(Duration.ofSeconds(30))
+            .flatMap {
+                val now = System.currentTimeMillis()
+                val timeSinceLastSeen = now - lastSeen.get()
 
-
-и ток через 20 секунд по этому соединению исключение на бэке
-
-11.02 15:18:51.289  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Failed to send ping to a39da8c: Connection has been closed BEFORE send operation
-11.02 15:18:51.289  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: a39da8c, remaining clients: 0
-11.02 15:18:51.289 ERROR [         parallel-1] reactor.core.publisher.Operators        : Operator called default onErrorDropped
-
-reactor.core.Exceptions$ErrorCallbackNotImplemented: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
-Caused by: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
-	at reactor.netty.channel.AbortedException.beforeSend(AbortedException.java:59)
-	at reactor.netty.http.server.HttpServerOperations.then(HttpServerOperations.java:691)
-	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:750)
-	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:739)
-	at reactor.netty.NettyOutbound.then(NettyOutbound.java:358)
-	at reactor.netty.channel.ChannelOperations.sendObject(ChannelOperations.java:314)
-	at reactor.netty.NettyOutbound.sendObject(NettyOutbound.java:246)
-	at org.springframework.web.reactive.socket.adapter.ReactorNettyWebSocketSession.send(ReactorNettyWebSocketSession.java:110)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:126)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:113)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler.heartbeat$lambda$2(FeedWebSocketHandler.kt:113)
-	at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:388)
-	at reactor.core.publisher.FluxInterval$IntervalRunnable.run(FluxInterval.java:124)
-	at reactor.core.scheduler.PeriodicWorkerTask.call(PeriodicWorkerTask.java:59)
-	at reactor.core.scheduler.PeriodicWorkerTask.run(PeriodicWorkerTask.java:73)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+                if (timeSinceLastSeen >= 90_000) {
+                    log.warn("Session {} timed out (no activity for {}ms). Closing.",
+                        session.id, timeSinceLastSeen)
+                    BroadcastRegistry.unregister(session.id)
+                    session.close().subscribe()
+                    Mono.empty<WebSocketMessage>()
+                } else {
+                    log.debug("Sending PING to session {}", session.id)
+                    val ping = session.textMessage(WsMessage.ping().toJson())
+                    session.send(Mono.just(ping))
+                        .doOnError { e ->
+                            log.warn("Failed to send ping to {}: {}", session.id, e.message)
+                            BroadcastRegistry.unregister(session.id)
+                            session.close().subscribe()
+                        }
+                        .subscribe()
+                    Mono.just(ping)
+                }
+            }
