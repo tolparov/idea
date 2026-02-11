@@ -1,95 +1,30 @@
-import { closeSocket, openSocket, pong, setMessages, setError } from '../redux/user-notifications/user-notifications-slice';
+15:59:03.548 index-D9zEqJp7.js:481  action userNotificationsSlice/connect @ 15:59:03.544
+15:59:03.548 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+15:59:03.548 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/connect', payload: undefined}
+15:59:03.548 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+15:59:33.794 index-D9zEqJp7.js:481  action userNotificationsSlice/pong @ 15:59:33.794
+15:59:33.794 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+15:59:33.794 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/pong', payload: undefined}
+15:59:33.795 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:00:03.796 index-D9zEqJp7.js:481  action userNotificationsSlice/pong @ 16:00:03.796
+16:00:03.796 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:00:03.796 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/pong', payload: undefined}
+16:00:03.796 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:00:33.789 index-D9zEqJp7.js:481  action userNotificationsSlice/pong @ 16:00:33.789
+16:00:33.790 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:00:33.790 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/pong', payload: undefined}
+16:00:33.790 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:01:03.799 index-D9zEqJp7.js:481  action userNotificationsSlice/pong @ 16:01:03.799
+16:01:03.799 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:01:03.799 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/pong', payload: undefined}
+16:01:03.799 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:01:33.793 index-D9zEqJp7.js:481  action userNotificationsSlice/pong @ 16:01:33.793
+16:01:33.793 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:01:33.793 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/pong', payload: undefined}
+16:01:33.794 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
+16:01:58.384 index-D9zEqJp7.js:508 ws the next action: {type: 'userNotificationsSlice/closeSocket', payload: undefined}
+16:01:58.385 index-D9zEqJp7.js:481  action userNotificationsSlice/closeSocket @ 16:01:58.384
+16:01:58.385 index-D9zEqJp7.js:481  prev state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}aiApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}app: {notifications: Array(0), user: {…}}applicationView: {beneficiariesFields: {…}, shareholdersFields: {…}, subsidiariesFields: {…}, application: {…}}arbitrageApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}arbitrageDownloadApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}basketApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}derCommit: {dataForTakeToExecution: null, dataForTakeToWork: null, dataForSave: null, dataForAgree: null, filesList: Array(0), …}derEmployeeBasket: {apps: Array(0), asDisStatuses: Array(0), loadStatusAsDisStatuses: {…}, loadStatusDerApplications: {…}}derFileUpload: {uploadResult: null, status: {…}, uuid: null, fileName: null, loadStatus: {…}}derHistory: {derHistoryTable: Array(0), derHistoryDetail: null, loadStatusFetchCancel: {…}, loadStatusFetchHistoryDetail: {…}, loadStatusFetchHistoryTable: {…}, …}derRegistryDownload: {status: {…}, uuid: null, fileName: null, loadStatus: {…}}derRegistryList: {list: Array(0), asDisStatuses: Array(0), warningMessage: null, allRowsCount: null, loadStatusDerApplications: {…}, …}deviationRegistryTableApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}deviationSlice: {reasonReturn: '', isReasonsTouched: false, deviationData: {…}, status: 'Назначен исполнитель', error: null}deviationsApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}dictionaries: {filter: {…}, dictionaries: Array(0), changes: Array(0), description: null, page: 0, …}disApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}disReassignUserApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}exceptionOfRulesSlice: {isReasonsTouched: false, isFormValid: false, idType: 'INN', isDisabled: false, isReadOnly: false, …}fmRegistry: {FMRegistry: Array(0), loadStatusFMRegistry: {…}}focusMonitoring: {commitFields: null, viewFields: null, manualUploadStatus: null, manualUploadVerifyDefaultStatus: null, listTable: Array(0), …}focusMonitoringApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}fraudRegistry: {frauds: Array(0), allRowsCount: 0, warningMessage: null, fraudHistory: Array(0), fraudHistoryAllRowsCount: 0, …}fraudRegistryApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}gsmApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}initDer: {initiationComplete: false, appId: null, activeStep: 0, steps: Array(4), formData: {…}, …}legalEntity: {legalEntityFile: {…}, filteredDate: '2023-02-11', loadStatusLegalEntityFile: {…}, loadStatusLegalEntityClientRelationsHistory: {…}, loadStatusPersonEntityClientRelationsHistory: {…}}legalSearch: {rows: Array(0), page: 0, totalRows: 100, rowsPerPage: 20, order: 'asc', …}listCheck: {fileUuid: null, fileReady: false, reportUuid: null, reportReady: false, scoringUuid: null, …}listCheckApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}listDer: {initiationComplete: false, appId: null, activeStep: 0, steps: Array(4), formData: {…}, …}maintenance: {dataAS: Array(0), dataAM: Array(0), dataHealthchecker: Array(0), loadStatusFetchAS: {…}, loadStatusFetchAM: {…}, …}modelResultsApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}offlineKeeper: {data: Array(0), filteredData: Array(0), reportItem: null, loadStatusData: {…}, loadStatusUnblock: {…}, …}pcfApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}pcfSlice: {pcfInitiationFeatures: Array(0), pcfMonitoringStatus: null}pulpFictionApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}report: {fileSizeData: null, tablePopup: null, table: {…}, params: {…}, compareTable: null, …}reprocessingApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}roles: {roles: Array(102), permissions: Array(0), activePermissions: Array(0), roleGroups: Array(0), activeRoleGroups: Array(0), …}rpfRegistryApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}ruleGroup: {ruleGroupList: Array(0), roles: Array(0), rules: Array(0), rulesCount: 0, ruleGroup: null, …}ruleGroupApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}ruleGroupsApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}rules1: {selectList: Array(0), schemes: Array(0), activeRequests: Array(0), timerId: null, loadStatusFetchruleGroupList: {…}, …}search: {blocksCollapsed: {…}}secondHandControl: {tableData: Array(0), entity: {…}, controlFeature: Array(0), loadStatusTableData: {…}, loadStatusEntityRequest: {…}, …}settingsAdminsUsers: {sortDirection: 'asc', sortByField: 'login', searchString: '', users: Array(0), paginator: {…}, …}sourceUl: {summary: null, tabs: null, tabContent: null, modelDescriptions: {…}, modelTabData: {…}, …}ulView: {requests: null, rules: null, borrower: null, loadStatusBorrower: {…}, loadStatusRequests: {…}, …}user: {ownUserInformation: null, otherUserInformation: null, loadStatusOwnUserInformation: {…}, loadStatusOtherUserInformation: {…}}userMessagesApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}userNotificationsSlice: {messages: Array(0), connected: false, error: ''}users: {users: Array(0), loadStatusFetchUsers: {…}}viewDer: {applicationData: {…}, employees: {…}, loadStatusFetchApplicationData: {…}, loadStatusFetchEmployees: {…}, loadStatusSendDerEmployee: {…}, …}zone: {legalRefresh: false, legalFormData: null, personFormData: null}zoneApi: {queries: {…}, mutations: {…}, provided: {…}, subscriptions: {…}, config: {…}}[[Prototype]]: Object
+16:01:58.386 index-D9zEqJp7.js:481  action     {type: 'userNotificationsSlice/closeSocket', payload: undefined}payload: undefinedtype: "userNotificationsSlice/closeSocket"[[Prototype]]: Objectconstructor: ƒ Object()hasOwnProperty: ƒ hasOwnProperty()isPrototypeOf: ƒ isPrototypeOf()propertyIsEnumerable: ƒ propertyIsEnumerable()toLocaleString: ƒ toLocaleString()toString: ƒ toString()valueOf: ƒ valueOf()__defineGetter__: ƒ __defineGetter__()__defineSetter__: ƒ __defineSetter__()__lookupGetter__: ƒ __lookupGetter__()__lookupSetter__: ƒ __lookupSetter__()__proto__: (...)get __proto__: ƒ __proto__()set __proto__: ƒ __proto__()
+16:01:58.386 index-D9zEqJp7.js:481  next state {app: {…}, offlineKeeper: {…}, applicationView: {…}, listCheck: {…}, zone: {…}, …}
 
-const userNotificationsApiMiddleware = () => {
-  let socket;
-
-  const onOpen = (store) => (event) => {
-    console.log('websocket open', event.target.url);
-    store.dispatch(openSocket());
-  };
-
-  const onClose = (store) => (event) => {
-    console.log('websocket close', event);
-    store.dispatch(closeSocket());
-  };
-
-  const onMessage = (store) => (event) => {
-    const payload = JSON.parse(event.data);
-    console.log('receiving server message', payload);
-
-    if (payload.type === 'ping') {
-      store.dispatch(pong());
-      return;
-    }
-
-    if (payload.type === 'error') {
-      store.dispatch(setError(payload.message));
-      return;
-    } else {
-      // store.dispatch(setError(''));
-    }
-
-    if (payload.type === 'data') {
-      console.log('pushing Audit', payload.data);
-      store.dispatch(setMessages(payload.data));
-      return;
-    }
-  };
-
-  const onError = (store) => (event) => {
-    const payload = JSON.parse(event.data ? event.data : 'no error data');
-    console.log('receiving server error', payload, event);
-    store.dispatch(setError(payload));
-  };
-
-  return (store) => (next) => (action) => {
-    if (!action.type.includes('userNotificationsSlice')) {
-      return next(action);
-    }
-
-    switch (action.type) {
-      case 'userNotificationsSlice/pong':
-        console.log('ws pong');
-        socket.send(JSON.stringify({ type: 'ping' }));
-        break;
-
-      case 'userNotificationsSlice/connect':
-        console.log('ws connecting', socket);
-        if (!socket || socket.readyState !== WebSocket.OPEN) {
-          const url = location.hostname.includes('localhost')
-            ? 'ws://' + location.hostname + ':8080/poirot/ws/notifications'
-            : 'wss://' + location.hostname + '/poirot/notifications/ws/feed';
-          socket = new WebSocket(url);
-        }
-        socket.onopen = () => {
-          onOpen(store);
-          socket.send(JSON.stringify({ type: 'subscribe' }));
-        }
-        socket.onclose = onClose(store);
-        socket.onmessage = onMessage(store);
-        socket.onerror = onError(store);
-        break;
-
-      // case 'userNotificationsSlice/subscribe':
-      //   console.log('ws sending', action.payload);
-      //   if (socket && socket.readyState === WebSocket.OPEN) {
-      //     // socket.send(JSON.stringify({ type: 'subscribe', data: action.payload }));
-      //     socket.send(JSON.stringify({ type: 'subscribe' }));
-      //   }
-      //   break;
-      case 'userNotificationsSlice/clean':
-        console.log('ws cleaning', socket);
-        if (socket && socket.readyState === WebSocket.OPEN) {
-          console.log('ws cleaning true');
-
-          socket.close();
-        }
-        break;
-      default:
-        console.log('ws the next action:', action);
-        next(action);
-    }
-  };
-};
-
-export const userNotificationsMiddleware = userNotificationsApiMiddleware();
