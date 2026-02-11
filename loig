@@ -1,0 +1,380 @@
+Picked up JAVA_TOOL_OPTIONS: -Xbootclasspath/a:/vault/secrets -Dapp.version=poirotPkapTestBuild-1.11115 -Dconfig.version=poirotPkapTestBuild-1.11115 -Dfile.encoding=UTF-8 -Dkotlinx.coroutines.io.parallelism=25 -XX:MaxDirectMemorySize=120M -XX:MaxRAMPercentage=31  -XX:+CrashOnOutOfMemoryError  -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+13:39:42,784 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.5.18
+13:39:42,789 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Here is a list of configurators discovered as a service, by rank: 
+13:39:42,789 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 -   org.springframework.boot.logging.logback.RootLogLevelConfigurator
+13:39:42,789 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - They will be invoked in order until ExecutionStatus.DO_NOT_INVOKE_NEXT_IF_ANY is returned.
+13:39:42,789 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Constructed configurator of type class org.springframework.boot.logging.logback.RootLogLevelConfigurator
+13:39:42,885 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - org.springframework.boot.logging.logback.RootLogLevelConfigurator.configure() call lasted 0 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+13:39:42,885 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+13:39:42,888 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+13:39:42,898 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+13:39:42,898 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+13:39:42,899 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 11 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+13:39:42,899 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+13:39:42,980 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+13:39:42,982 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+13:39:42,986 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/app/resources/logback.xml]
+13:39:43,492 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 5
+13:39:43,493 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 6
+13:39:43,493 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 7
+13:39:43,896 |-INFO in ch.qos.logback.core.model.processor.TimestampModelHandler - Using current interpretation time, i.e. now, as time reference.
+13:39:43,997 |-INFO in ch.qos.logback.core.model.processor.TimestampModelHandler - Adding property to the context with key="byDayHH" and value="20260211T133943" to the LOCAL scope
+13:39:43,997 |-INFO in ch.qos.logback.core.model.processor.TimestampModelHandler - Using current interpretation time, i.e. now, as time reference.
+13:39:43,998 |-INFO in ch.qos.logback.core.model.processor.TimestampModelHandler - Adding property to the context with key="byDay" and value="20260211" to the LOCAL scope
+13:39:43,998 |-INFO in ch.qos.logback.core.model.processor.ConversionRuleModelHandler - registering conversion word clr with class [org.springframework.boot.logging.logback.ColorConverter]
+13:39:43,999 |-INFO in ch.qos.logback.core.model.processor.ConversionRuleModelHandler - registering conversion word wex with class [org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter]
+13:39:43,999 |-INFO in ch.qos.logback.core.model.processor.ConversionRuleModelHandler - registering conversion word wEx with class [org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter]
+13:39:44,082 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [STDOUT]
+13:39:44,083 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+13:39:44,098 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+13:39:44,399 |-INFO in ch.qos.logback.core.ConsoleAppender[STDOUT] - BEWARE: Writing to the console can be very slow. Avoid logging to the 
+13:39:44,399 |-INFO in ch.qos.logback.core.ConsoleAppender[STDOUT] - console in production environments, especially in high volume systems.
+13:39:44,399 |-INFO in ch.qos.logback.core.ConsoleAppender[STDOUT] - See also https://logback.qos.ch/codes.html#slowConsole
+13:39:44,400 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE]
+13:39:44,400 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+13:39:44,405 |-INFO in ch.qos.logback.classic.pattern.DateConverter@10683d9d - Setting zoneId to "UTC"
+13:39:44,486 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1069716895 - setting totalSizeCap to 1 GB
+13:39:44,490 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1069716895 - Archive files will be limited to [100 MB] each.
+13:39:44,490 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1069716895 - No compression will be used
+13:39:44,493 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1069716895 - Will use the pattern logs/notifications.%d{yyyy-MM-dd}.%i.log for the active file
+13:39:44,681 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@5aa9e4eb - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/notifications.%d{yyyy-MM-dd}.%i.log'.
+13:39:44,681 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@5aa9e4eb - Roll-over at midnight.
+13:39:44,690 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@5aa9e4eb - Setting initial period to 2026-02-11T10:39:44.689Z
+13:39:44,782 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - Active log file name: logs/notifications.log
+13:39:44,782 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE] - File property is set to [logs/notifications.log]
+13:39:44,784 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [FILE_ERRORS]
+13:39:44,784 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+13:39:44,785 |-INFO in ch.qos.logback.classic.pattern.DateConverter@6989da5e - Setting zoneId to "UTC"
+13:39:44,785 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@945591847 - setting totalSizeCap to 100 MB
+13:39:44,785 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@945591847 - Archive files will be limited to [50 MB] each.
+13:39:44,785 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@945591847 - No compression will be used
+13:39:44,786 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@945591847 - Will use the pattern logs/notifications.%d{yyyy-MM-dd}.%i-errors.log for the active file
+13:39:44,786 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@139982de - The date pattern is 'yyyy-MM-dd' from file name pattern 'logs/notifications.%d{yyyy-MM-dd}.%i-errors.log'.
+13:39:44,786 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@139982de - Roll-over at midnight.
+13:39:44,787 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@139982de - Setting initial period to 2026-02-11T10:39:44.787Z
+13:39:44,787 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE_ERRORS] - Active log file name: logs/notifications-errors.log
+13:39:44,787 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[FILE_ERRORS] - File property is set to [logs/notifications-errors.log]
+13:39:44,787 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ASYNC_FILE]
+13:39:44,787 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+13:39:44,790 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE] to ch.qos.logback.classic.AsyncAppender[ASYNC_FILE]
+13:39:44,790 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_FILE] - Attaching appender named [FILE] to AsyncAppender.
+13:39:44,791 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_FILE] - Setting discardingThreshold to 1638
+13:39:44,792 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ASYNC_FILE_ERRORS]
+13:39:44,792 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+13:39:44,793 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [FILE_ERRORS] to ch.qos.logback.classic.AsyncAppender[ASYNC_FILE_ERRORS]
+13:39:44,793 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_FILE_ERRORS] - Attaching appender named [FILE_ERRORS] to AsyncAppender.
+13:39:44,793 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_FILE_ERRORS] - Setting discardingThreshold to 1638
+13:39:44,793 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ASYNC_STDOUT]
+13:39:44,793 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+13:39:44,793 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [STDOUT] to ch.qos.logback.classic.AsyncAppender[ASYNC_STDOUT]
+13:39:44,793 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_STDOUT] - Attaching appender named [STDOUT] to AsyncAppender.
+13:39:44,794 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_STDOUT] - Setting discardingThreshold to 1638
+13:39:44,794 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+13:39:44,794 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ASYNC_STDOUT] to Logger[ROOT]
+13:39:44,794 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ASYNC_FILE_ERRORS] to Logger[ROOT]
+13:39:44,794 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ASYNC_FILE] to Logger[ROOT]
+13:39:44,795 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.flywaydb] to DEBUG
+13:39:44,795 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.zaxxer.hikari.HikariConfig] to ERROR
+13:39:44,795 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@682b2fa - End of configuration.
+13:39:44,796 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@217ed35e - Registering current configuration as safe fallback point
+13:39:44,796 |-INFO in ch.qos.logback.classic.util.ContextInitializer@1f2586d6 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 1816 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
+
+13:39:47,694 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 5
+13:39:47,695 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 6
+13:39:47,695 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 7
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+11.02 13:39:48.583  INFO [               main] r.s.p.n.NotificationsStarterKt          : Starting NotificationsStarterKt using Java 17.0.7 with PID 1 (/app/classes started by 1003350000 in /home/jboss)
+11.02 13:39:48.585  INFO [               main] r.s.p.n.NotificationsStarterKt          : No active profile set, falling back to 1 default profile: "default"
+11.02 13:40:05.696  INFO [               main] r.s.p.e.datasources.PoirotDataSource    : Registering HikariDataSource for poirot_users database
+11.02 13:40:05.883  INFO [               main] com.zaxxer.hikari.HikariDataSource      : HikariPool-1 - Starting...
+11.02 13:40:07.911  INFO [               main] com.zaxxer.hikari.pool.HikariPool       : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f596a1a
+11.02 13:40:07.981  INFO [               main] com.zaxxer.hikari.HikariDataSource      : HikariPool-1 - Start completed.
+11.02 13:40:13.390  INFO [               main] r.s.p.e.d.refreshable.RefreshableConfig : Static micrometer initiated
+11.02 13:40:13.593  INFO [               main] r.s.p.e.ds.refreshable.Refreshables     : Using heap collections for refreshables.
+11.02 13:40:14.798  INFO [               main] org.reflections.Reflections             : Reflections took 1108 ms to scan 14 urls, producing 104 keys and 1290 values
+11.02 13:40:15.498  INFO [         refresh-01] r.s.p.e.d.r.core.AbstractRefreshable    : Going to refresh 'FeedableHolder.NOTIFICATION_FEED'. Limit: 1/10.
+11.02 13:40:21.284  INFO [         refresh-01] s.p.e.d.q.b.s.j.r.g.GraphLoaderGenerator: Generated GraphLoader in 5485 ms for '[adminNotification.id, adminNotification.archive, adminNotification.publish, adminNotification.created, adminNotification.lastModified, adminNotification.dateFrom, adminNotification.dateTo, adminNotification.type, adminNotification.message, adminNotification.author, adminNotification.mapping.id, adminNotification.mapping.roleId, adminNotification.mapping.adminNotificationId]'
+11.02 13:40:21.287  INFO [         refresh-01] r.s.p.e.d.q.b.s.jdbc.JdbcSelectFactory  : GENERATED DSL SQL(1) in 5683 ms:
+***
+findAll(adminNotification, orderBy = listOf(adminNotification.lastModified), order = DESC, batch = false, deduplicate = true) fetchFields { listOf(adminNotification.id, adminNotification.archive, adminNotification.publish, adminNotification.created, adminNotification.lastModified, adminNotification.dateFrom, adminNotification.dateTo, adminNotification.type, adminNotification.message, adminNotification.author, adminNotification.mapping.id, adminNotification.mapping.roleId, adminNotification.mapping.adminNotificationId) } where {
+  adminNotification.dateFrom <= ?
+  adminNotification.dateTo >= ?
+  adminNotification.archive = false
+  adminNotification.publish = true
+}
+SELECT adminNotification_0.id, adminNotification_0.archive, adminNotification_0.publish, adminNotification_0.created, adminNotification_0.last_modified, adminNotification_0.date_from, adminNotification_0.date_to, adminNotification_0.type, adminNotification_0.message, adminNotification_0.author
+from admin_notifications adminNotification_0
+where (adminNotification_0.date_from <= ? and 
+adminNotification_0.date_to >= ? and 
+adminNotification_0.archive = false and 
+adminNotification_0.publish = true)
+order by adminNotification_0.last_modified desc
+***
+11.02 13:40:21.702  INFO [         refresh-01] r.s.p.e.d.r.core.AbstractRefreshable    : Refreshed 'FeedableHolder.NOTIFICATION_FEED'. Fetched 2 items in 6 sec. Size: 0 KB. Versions: 0 -> 1.
+11.02 13:40:21.793  INFO [               main] p.e.d.r.o.RegistrationRefreshableFactory: Initialized 1/1 refreshables in 6 sec. Remaining(0): []. CacheSize: 0 mb.
+11.02 13:40:21.996  INFO [               main] ru.sber.poirot.LogDownloader            : Exposed logs from /home/jboss/logs
+11.02 13:40:23.984  INFO [               main] o.h.validator.internal.util.Version     : HV000001: Hibernate Validator 8.0.3.Final
+11.02 13:40:26.091  INFO [               main] o.s.b.a.e.web.EndpointLinksResolver     : Exposing 6 endpoints beneath base path '/actuator'
+11.02 13:40:29.882  INFO [               main] o.s.b.web.embedded.netty.NettyWebServer : Netty started on port 7024 (http)
+11.02 13:40:30.385  INFO [               main] o.a.k.clients.consumer.ConsumerConfig   : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.include.jmx.reporter = true
+	auto.offset.reset = earliest
+	bootstrap.servers = [tsldq-puaro0001.delta.sbrf.ru:9093, tsldq-puaro0002.delta.sbrf.ru:9093]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-notifications-notifications-ift-am-pkap-1
+	client.rack = 
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = notifications-notifications-ift-am-pkap
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 1
+	metadata.max.age.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+11.02 13:40:30.885  INFO [               main] o.a.k.c.t.i.KafkaMetricsCollector       : initializing Kafka metrics collector
+11.02 13:40:32.289  INFO [               main] o.a.kafka.common.utils.AppInfoParser    : Kafka version: 3.9.1
+11.02 13:40:32.289  INFO [               main] o.a.kafka.common.utils.AppInfoParser    : Kafka commitId: f745dfdcee2b9851
+11.02 13:40:32.289  INFO [               main] o.a.kafka.common.utils.AppInfoParser    : Kafka startTimeMs: 1770806432287
+11.02 13:40:32.488  INFO [               main] o.a.k.c.c.i.ClassicKafkaConsumer        : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Subscribed to topic(s): NOTIFICATION_UPDATES
+11.02 13:40:33.083  INFO [               main] r.s.p.n.NotificationsStarterKt          : Started NotificationsStarterKt in 47.781 seconds (process running for 51.68)
+11.02 13:40:35.687  INFO [ntContainer#0-0-C-1] org.apache.kafka.clients.Metadata       : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Cluster ID: 3mwehz1QR16bE9BAaNZ2kA
+11.02 13:40:35.689  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Discovered group coordinator tsldq-puaro0002.cloud.delta.sbrf.ru:9093 (id: 2147483646 rack: null)
+11.02 13:40:35.810  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] (Re-)joining group
+11.02 13:40:35.882  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Request joining group due to: need to re-join with the given member-id: consumer-notifications-notifications-ift-am-pkap-1-05dc76ee-be5c-45eb-808a-521ee68bc9ac
+11.02 13:40:35.882  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] (Re-)joining group
+11.02 13:40:36.882  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Successfully joined group with generation Generation{generationId=8, memberId='consumer-notifications-notifications-ift-am-pkap-1-05dc76ee-be5c-45eb-808a-521ee68bc9ac', protocol='range'}
+11.02 13:40:36.892  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Finished assignment for group at generation 8: {consumer-notifications-notifications-ift-am-pkap-1-05dc76ee-be5c-45eb-808a-521ee68bc9ac=Assignment(partitions=[NOTIFICATION_UPDATES-0, NOTIFICATION_UPDATES-1, NOTIFICATION_UPDATES-2])}
+11.02 13:40:37.082  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Successfully synced group in generation Generation{generationId=8, memberId='consumer-notifications-notifications-ift-am-pkap-1-05dc76ee-be5c-45eb-808a-521ee68bc9ac', protocol='range'}
+11.02 13:40:37.082  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Notifying assignor about the new Assignment(partitions=[NOTIFICATION_UPDATES-0, NOTIFICATION_UPDATES-1, NOTIFICATION_UPDATES-2])
+11.02 13:40:37.086  INFO [ntContainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker: [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Adding newly assigned partitions: NOTIFICATION_UPDATES-0, NOTIFICATION_UPDATES-1, NOTIFICATION_UPDATES-2
+11.02 13:40:37.186  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Found no committed offset for partition NOTIFICATION_UPDATES-0
+11.02 13:40:37.186  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Found no committed offset for partition NOTIFICATION_UPDATES-1
+11.02 13:40:37.188  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.ConsumerUtils       : Setting offset for partition NOTIFICATION_UPDATES-2 to the committed offset FetchPosition{offset=7, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[tsldq-puaro0002.cloud.delta.sbrf.ru:9093 (id: 1 rack: null)], epoch=0}}
+11.02 13:40:38.087  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.SubscriptionState   : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Resetting offset for partition NOTIFICATION_UPDATES-0 to position FetchPosition{offset=15, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[tsldq-puaro0002.cloud.delta.sbrf.ru:9093 (id: 1 rack: null)], epoch=0}}.
+11.02 13:40:38.182  INFO [ntContainer#0-0-C-1] o.a.k.c.c.internals.SubscriptionState   : [Consumer clientId=consumer-notifications-notifications-ift-am-pkap-1, groupId=notifications-notifications-ift-am-pkap] Resetting offset for partition NOTIFICATION_UPDATES-1 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[tsldq-puaro0001.cloud.delta.sbrf.ru:9093 (id: 2 rack: null)], epoch=0}}.
+11.02 13:40:38.183  INFO [ntContainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer   : notifications-notifications-ift-am-pkap: partitions assigned: [NOTIFICATION_UPDATES-0, NOTIFICATION_UPDATES-1, NOTIFICATION_UPDATES-2]
+11.02 13:40:39.487  INFO [Dispatcher-worker-1] r.s.p.n.kafka.NotificationConsumer      : 📨 Received notification event from Kafka: type=CREATED, id=7954
+11.02 13:40:39.589  INFO [Dispatcher-worker-1] r.s.p.e.d.q.b.s.jdbc.JdbcSelectFactory  : GENERATED DSL SQL(2) in 1 ms:
+***
+findAll(adminNotification, limit = 1, batch = false, deduplicate = true) fetchFields { listOf(adminNotification.id, adminNotification.archive, adminNotification.publish, adminNotification.created, adminNotification.lastModified, adminNotification.dateFrom, adminNotification.dateTo, adminNotification.type, adminNotification.message, adminNotification.author, adminNotification.mapping.id, adminNotification.mapping.roleId, adminNotification.mapping.adminNotificationId) } where {
+  adminNotification.id = ?
+}
+SELECT adminNotification_0.id, adminNotification_0.archive, adminNotification_0.publish, adminNotification_0.created, adminNotification_0.last_modified, adminNotification_0.date_from, adminNotification_0.date_to, adminNotification_0.type, adminNotification_0.message, adminNotification_0.author
+from admin_notifications adminNotification_0
+where adminNotification_0.id = ?
+limit 1
+***
+11.02 13:40:39.607  INFO [Dispatcher-worker-1] r.s.p.n.kafka.NotificationConsumer      : 📢 Broadcasting notification 7954 clients on this pod
+11.02 13:40:39.608  INFO [Dispatcher-worker-1] r.s.p.n.websocket.BroadcastRegistry     : 📢 Broadcasting 1 notifications to 0 clients
+11.02 13:41:09.201  INFO [         refresh-01] r.s.p.e.d.r.core.AbstractRefreshable    : Refreshed 'FeedableHolder.NOTIFICATION_FEED'. Fetched 2 items in 0 sec. Size: 0 KB. Versions: 1 -> 2.
+11.02 13:41:47.185  INFO [sactions-suspend-01] r.s.s.p.s.f.VisitorPersisterFactoryImpl : Generated visitor/persister for AdminNotification in 2602 ms.
+11.02 13:41:48.395  INFO [sactions-suspend-01] r.s.s.p.s.f.VisitorPersisterFactoryImpl : Generated visitor/persister for AdminNotificationRoleMapping in 897 ms.
+11.02 13:41:48.495  INFO [Dispatcher-worker-1] r.s.p.n.kafka.NotificationProducer      : 📤 Sending notification event to Kafka: type=ARCHIVED, id=7954
+11.02 13:41:48.589  INFO [Dispatcher-worker-1] o.a.k.clients.producer.ProducerConfig   : Idempotence will be disabled because acks is set to 1, not set to 'all'.
+11.02 13:41:48.590  INFO [Dispatcher-worker-1] o.a.k.clients.producer.ProducerConfig   : ProducerConfig values: 
+	acks = 1
+	auto.include.jmx.reporter = true
+	batch.size = 16384
+	bootstrap.servers = [tsldq-puaro0001.delta.sbrf.ru:9093, tsldq-puaro0002.delta.sbrf.ru:9093]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = notifications-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+11.02 13:41:48.591  INFO [Dispatcher-worker-1] o.a.k.c.t.i.KafkaMetricsCollector       : initializing Kafka metrics collector
+11.02 13:41:48.789  INFO [Dispatcher-worker-1] o.a.kafka.common.utils.AppInfoParser    : Kafka version: 3.9.1
+11.02 13:41:48.789  INFO [Dispatcher-worker-1] o.a.kafka.common.utils.AppInfoParser    : Kafka commitId: f745dfdcee2b9851
+11.02 13:41:48.789  INFO [Dispatcher-worker-1] o.a.kafka.common.utils.AppInfoParser    : Kafka startTimeMs: 1770806508789
+11.02 13:41:48.889  INFO [ications-producer-1] org.apache.kafka.clients.Metadata       : [Producer clientId=notifications-producer-1] Cluster ID: 3mwehz1QR16bE9BAaNZ2kA
+11.02 13:41:49.385  INFO [Dispatcher-worker-2] r.s.p.e.d.q.b.s.jdbc.JdbcSelectFactory  : GENERATED DSL SQL(3) in 1 ms:
+***
+findAll(adminNotification, batch = false, deduplicate = true) fetchFields { listOf(adminNotification.id, adminNotification.archive, adminNotification.publish, adminNotification.created, adminNotification.lastModified, adminNotification.dateFrom, adminNotification.dateTo, adminNotification.type, adminNotification.message, adminNotification.author, adminNotification.mapping.id, adminNotification.mapping.roleId, adminNotification.mapping.adminNotificationId) } where {
+  adminNotification.archive = false
+}
+SELECT adminNotification_0.id, adminNotification_0.archive, adminNotification_0.publish, adminNotification_0.created, adminNotification_0.last_modified, adminNotification_0.date_from, adminNotification_0.date_to, adminNotification_0.type, adminNotification_0.message, adminNotification_0.author
+from admin_notifications adminNotification_0
+where adminNotification_0.archive = false
+***
+11.02 13:42:03.847  INFO [         refresh-01] r.s.p.e.d.r.core.AbstractRefreshable    : Refreshed 'FeedableHolder.NOTIFICATION_FEED'. Fetched 1 items in 0 sec. Size: 0 KB. Versions: 2 -> 3.
+11.02 13:42:13.205  INFO [Dispatcher-worker-1] r.s.p.n.kafka.NotificationProducer      : 📤 Sending notification event to Kafka: type=ARCHIVED, id=7953
