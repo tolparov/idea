@@ -1,164 +1,131 @@
-11.02 14:43:40.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 329940ms). Closing.
-11.02 14:43:40.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:43:42.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1650002ms). Closing.
-11.02 14:43:42.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:43:45.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1169977ms). Closing.
-11.02 14:43:45.799  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:43:46.689  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1079982ms). Closing.
-11.02 14:43:46.689  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:43:51.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1109945ms). Closing.
-11.02 14:43:51.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:43:52.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1619945ms). Closing.
-11.02 14:43:52.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:43:53.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 749953ms). Closing.
-11.02 14:43:53.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:43:54.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1469858ms). Closing.
-11.02 14:43:54.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:44:10.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 359940ms). Closing.
-11.02 14:44:10.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:44:12.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1680002ms). Closing.
-11.02 14:44:12.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:44:15.802  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1199980ms). Closing.
-11.02 14:44:15.802  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:44:16.689  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1109982ms). Closing.
-11.02 14:44:16.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:44:21.813  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1139946ms). Closing.
-11.02 14:44:21.813  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:44:22.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1649945ms). Closing.
-11.02 14:44:22.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:44:23.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 779953ms). Closing.
-11.02 14:44:23.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:44:24.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1499858ms). Closing.
-11.02 14:44:24.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:44:40.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 389940ms). Closing.
-11.02 14:44:40.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:44:42.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1710002ms). Closing.
-11.02 14:44:42.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:44:45.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1229977ms). Closing.
-11.02 14:44:45.800  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:44:46.692  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1139985ms). Closing.
-11.02 14:44:46.694  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:44:51.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1169945ms). Closing.
-11.02 14:44:51.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:44:52.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1679945ms). Closing.
-11.02 14:44:52.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:44:53.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 809953ms). Closing.
-11.02 14:44:53.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:44:54.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1529858ms). Closing.
-11.02 14:44:54.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:45:10.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 419940ms). Closing.
-11.02 14:45:10.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:45:12.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1740002ms). Closing.
-11.02 14:45:12.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:45:15.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1259977ms). Closing.
-11.02 14:45:15.799  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:45:16.689  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1169982ms). Closing.
-11.02 14:45:16.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:45:21.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1199945ms). Closing.
-11.02 14:45:21.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:45:22.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1709945ms). Closing.
-11.02 14:45:22.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:45:23.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 839953ms). Closing.
-11.02 14:45:23.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:45:24.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1559858ms). Closing.
-11.02 14:45:24.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:45:40.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 449940ms). Closing.
-11.02 14:45:40.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:45:42.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1770002ms). Closing.
-11.02 14:45:42.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:45:45.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1289977ms). Closing.
-11.02 14:45:45.799  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:45:46.690  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1199983ms). Closing.
-11.02 14:45:46.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:45:51.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1229945ms). Closing.
-11.02 14:45:51.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:45:52.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1739945ms). Closing.
-11.02 14:45:52.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:45:53.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 869953ms). Closing.
-11.02 14:45:53.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:45:54.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1589858ms). Closing.
-11.02 14:45:54.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:46:10.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 479940ms). Closing.
-11.02 14:46:10.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:46:12.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1800002ms). Closing.
-11.02 14:46:12.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:46:15.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1319977ms). Closing.
-11.02 14:46:15.800  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:46:16.690  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1229983ms). Closing.
-11.02 14:46:16.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:46:21.813  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1259946ms). Closing.
-11.02 14:46:21.813  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:46:22.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1769945ms). Closing.
-11.02 14:46:22.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:46:23.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 899953ms). Closing.
-11.02 14:46:23.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:46:24.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1619858ms). Closing.
-11.02 14:46:24.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:46:40.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 509940ms). Closing.
-11.02 14:46:40.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:46:42.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1830002ms). Closing.
-11.02 14:46:42.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 2
-11.02 14:46:45.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1349977ms). Closing.
-11.02 14:46:45.799  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 2
-11.02 14:46:46.690  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1259983ms). Closing.
-11.02 14:46:46.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 2
-11.02 14:46:51.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1289945ms). Closing.
-11.02 14:46:51.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 2
-11.02 14:46:52.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1799945ms). Closing.
-11.02 14:46:52.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 2
-11.02 14:46:53.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 929953ms). Closing.
-11.02 14:46:53.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 2
-11.02 14:46:54.470  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1649858ms). Closing.
-11.02 14:46:54.470  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 2
-11.02 14:47:10.502  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2827e088 timed out (no activity for 539940ms). Closing.
-11.02 14:47:10.502  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2827e088, remaining clients: 2
-11.02 14:47:10.770  INFO [Dispatcher-worker-2] r.s.p.n.kafka.NotificationConsumer      : 📨 Received notification event from Kafka: type=UPDATED, id=8053
-11.02 14:47:10.780  INFO [Dispatcher-worker-2] r.s.p.n.kafka.NotificationConsumer      : 📢 Broadcasting notification 8053 clients on this pod
-11.02 14:47:10.780  INFO [Dispatcher-worker-2] r.s.p.n.websocket.BroadcastRegistry     : 📢 Broadcasting 1 notifications to 2 clients
-11.02 14:47:10.780  WARN [Dispatcher-worker-2] r.s.p.n.websocket.BroadcastRegistry     : 🧹 Cleaning up 1 dead sessions
-11.02 14:47:10.780  INFO [Dispatcher-worker-2] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2ebd82ff, remaining clients: 1
-11.02 14:47:12.274  INFO [Dispatcher-worker-2] r.s.p.n.kafka.NotificationConsumer      : 📨 Received notification event from Kafka: type=UPDATED, id=8053
-11.02 14:47:12.279  INFO [Dispatcher-worker-2] r.s.p.n.kafka.NotificationConsumer      : 📢 Broadcasting notification 8053 clients on this pod
-11.02 14:47:12.279  INFO [Dispatcher-worker-2] r.s.p.n.websocket.BroadcastRegistry     : 📢 Broadcasting 1 notifications to 1 clients
-11.02 14:47:12.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 63f3fda2 timed out (no activity for 1860002ms). Closing.
-11.02 14:47:12.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 63f3fda2, remaining clients: 1
-11.02 14:47:15.799  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 4943dcb2 timed out (no activity for 1379977ms). Closing.
-11.02 14:47:15.800  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 4943dcb2, remaining clients: 1
-11.02 14:47:16.689  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 124e707e timed out (no activity for 1289982ms). Closing.
-11.02 14:47:16.690  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 124e707e, remaining clients: 1
-11.02 14:47:21.812  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2f803d65 timed out (no activity for 1319945ms). Closing.
-11.02 14:47:21.812  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2f803d65, remaining clients: 1
-11.02 14:47:22.434  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 3319333b timed out (no activity for 1829945ms). Closing.
-11.02 14:47:22.434  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 3319333b, remaining clients: 1
-11.02 14:47:23.325  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 1cef7c9e timed out (no activity for 959953ms). Closing.
-11.02 14:47:23.325  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 1cef7c9e, remaining clients: 1
-11.02 14:47:23.504  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Failed to send ping to 2ebd82ff: Connection has been closed BEFORE send operation
-11.02 14:47:23.504  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2ebd82ff, remaining clients: 1
-11.02 14:47:23.505 ERROR [         parallel-1] reactor.core.publisher.Operators        : Operator called default onErrorDropped
+package ru.sber.poirot.audit.websocket
 
-reactor.core.Exceptions$ErrorCallbackNotImplemented: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
-Caused by: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
-	at reactor.netty.channel.AbortedException.beforeSend(AbortedException.java:59)
-	at reactor.netty.http.server.HttpServerOperations.then(HttpServerOperations.java:691)
-	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:750)
-	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:739)
-	at reactor.netty.NettyOutbound.then(NettyOutbound.java:358)
-	at reactor.netty.channel.ChannelOperations.sendObject(ChannelOperations.java:314)
-	at reactor.netty.NettyOutbound.sendObject(NettyOutbound.java:246)
-	at org.springframework.web.reactive.socket.adapter.ReactorNettyWebSocketSession.send(ReactorNettyWebSocketSession.java:110)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:126)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:113)
-	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler.heartbeat$lambda$2(FeedWebSocketHandler.kt:113)
-	at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:388)
-	at reactor.core.publisher.FluxInterval$IntervalRunnable.run(FluxInterval.java:124)
-	at reactor.core.scheduler.PeriodicWorkerTask.call(PeriodicWorkerTask.java:59)
-	at reactor.core.scheduler.PeriodicWorkerTask.run(PeriodicWorkerTask.java:73)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
-	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
-	at java.base/java.lang.Thread.run(Thread.java:833)
+import kotlinx.coroutines.reactor.mono
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.web.reactive.socket.*
+import ru.sber.poirot.exception.FrontException
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import ru.sber.parseJson
+import ru.sber.permissions.HAS_AUDIT_READ
+import ru.sber.poirot.audit.dao.Audit
+import ru.sber.poirot.audit.model.AuditEvent
+import ru.sber.poirot.audit.model.WsMessage
+import ru.sber.toJson
+import ru.sber.utils.logger
+import java.time.Duration
+import java.time.LocalDateTime
+import java.util.concurrent.atomic.AtomicLong
 
-11.02 14:47:24.476  WARN [         parallel-1] r.s.p.n.websocket.FeedWebSocketHandler  : Session 2d724a30 timed out (no activity for 1679864ms). Closing.
-11.02 14:47:24.476  INFO [         parallel-1] r.s.p.n.websocket.BroadcastRegistry     : ❌ Unregistered session: 2d724a30, remaining clients: 1
+class AuditWebSocketHandler(
+    private val auditDao: Audit
+) : WebSocketHandler {
+
+    private val log = logger()
+
+    @PreAuthorize(HAS_AUDIT_READ)
+    override fun handle(session: WebSocketSession): Mono<Void> {
+        log.info("New WS connection: {}", session.id)
+        val lastSeen = AtomicLong(System.currentTimeMillis())
+
+        val receiveFlux = session.receive()
+            .flatMap { msg ->
+                lastSeen.set(System.currentTimeMillis())
+                val payload = msg.payloadAsText
+
+                try {
+                    val wsMessage = payload.parseJson<WsMessage>()
+
+                    when (wsMessage.type) {
+                        WsMessage.Type.PING -> {
+                            log.debug("Received ping from {}", session.id)
+                            Mono.empty<Void>()
+                        }
+
+                        WsMessage.Type.SUBSCRIBE -> {
+                            val filterMap = wsMessage.data as? Map<*, *> ?: throw FrontException("Некорректные данные в сообщении SUBSCRIBE")
+                            val filter = SubscriptionFilter(
+                                dateFrom = LocalDateTime.parse(filterMap["dateFrom"] as String),
+                                dateTo = (filterMap["dateTo"] as? String)
+                                    ?.takeIf { it.isNotBlank() }
+                                    ?.let { LocalDateTime.parse(it) },
+                                login = (filterMap["login"] as? String?)?.takeIf { it.isNotBlank() }
+                            )
+
+                            val historical = mono {
+                                auditDao.filter(filter.dateFrom, filter.dateTo, filter.login)
+                            }.flatMapMany { historicalEvents ->
+                                if (historicalEvents.isNotEmpty()) {
+                                    Flux.fromIterable(historicalEvents.chunked(100))
+                                        .flatMap { batch ->
+                                            val msgText = WsMessage.data(batch).toJson()
+                                            session.send(Mono.just(session.textMessage(msgText)))
+                                        }
+                                } else {
+                                    Flux.empty<WebSocketMessage>()
+                                }
+                            }
+
+                            // 2️⃣ подписываем клиента на новые
+                            val live = Flux.create<AuditEvent> { sink ->
+                                BroadcastRegistry.register(session.id, filter, sink)
+                            }
+
+                            Flux.concat(
+                                historical,
+                                live.flatMap { event ->
+                                    val msg = WsMessage.data(listOf(event)).toJson()
+                                    session.send(Mono.just(session.textMessage(msg)))
+                                }
+                            )
+                        }
+
+                        else -> {
+                            log.warn("Unknown WS message type: {}", wsMessage.type)
+                            val err = WsMessage.error("Неизвестный тип: ${wsMessage.type}")
+                            session.send(Mono.just(session.textMessage(err.toJson()))).then()
+                        }
+                    }
+                } catch (e: Exception) {
+                    log.error("Ошибка при обработке WS-сообщения: {}", e.message)
+                    val errorMsg = WsMessage.error("Некорректные данные: ${e.message}")
+                    session.send(Mono.just(session.textMessage(errorMsg.toJson()))).then()
+                }
+            }
+            .doFinally { signal ->
+                log.info("Closing WS connection: {} by {}", session.id, signal)
+                BroadcastRegistry.unregister(session.id)
+            }
+
+        // Heartbeat: только отправка ping + проверка таймаута
+        val heartbeatFlux = heartbeat(lastSeen, session)
+
+        return Flux.merge(receiveFlux, heartbeatFlux).then()
+    }
+
+    fun broadcast(event: AuditEvent) {
+        BroadcastRegistry.publish(event)
+    }
+
+    fun heartbeat(lastSeen: AtomicLong, session: WebSocketSession): Flux<WebSocketMessage> =
+        Flux.interval(Duration.ofSeconds(180))
+            .flatMap {
+                val now = System.currentTimeMillis()
+                if (now - lastSeen.get() >= 600_000) {
+                    log.warn("Session {} did not respond to heartbeat. Closing.", session.id)
+                    BroadcastRegistry.unregister(session.id)
+                    session.close().subscribe()
+                    Mono.empty<WebSocketMessage>()
+                } else {
+                    val ping = session.textMessage(WsMessage.ping().toJson())
+                    session.send(Mono.just(ping))
+                        .doOnError { e ->
+                            log.warn("Failed to send ping to {}: {}", session.id, e.message)
+                            BroadcastRegistry.unregister(session.id)
+                            session.close().subscribe()
+                        }
+                        .subscribe()
+                    Mono.just(ping)
+                }
+            }
+}
