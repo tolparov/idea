@@ -1,131 +1,41 @@
-package ru.sber.poirot.audit.websocket
+import { createSlice } from '@reduxjs/toolkit';
+import { userNotificationsInitialState as initialState } from './initialState';
 
-import kotlinx.coroutines.reactor.mono
-import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.web.reactive.socket.*
-import ru.sber.poirot.exception.FrontException
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
-import ru.sber.parseJson
-import ru.sber.permissions.HAS_AUDIT_READ
-import ru.sber.poirot.audit.dao.Audit
-import ru.sber.poirot.audit.model.AuditEvent
-import ru.sber.poirot.audit.model.WsMessage
-import ru.sber.toJson
-import ru.sber.utils.logger
-import java.time.Duration
-import java.time.LocalDateTime
-import java.util.concurrent.atomic.AtomicLong
+const userNotificationsSlice = createSlice({
+  name: 'userNotificationsSlice',
+  initialState,
 
-class AuditWebSocketHandler(
-    private val auditDao: Audit
-) : WebSocketHandler {
+  reducers: {
+    connect() {},
+    pong() {},
+    openSocket(state) {
+      state.connected = true;
+    },
+    closeSocket(state) {
+      state.connected = false;
+      state.messages = [];
+    },
 
-    private val log = logger()
+    setMessages(state, action) {
+      state.messages = action.payload;
+    },
 
-    @PreAuthorize(HAS_AUDIT_READ)
-    override fun handle(session: WebSocketSession): Mono<Void> {
-        log.info("New WS connection: {}", session.id)
-        val lastSeen = AtomicLong(System.currentTimeMillis())
+    setError(state, action) {
+      state.error = action.payload;
+    },
 
-        val receiveFlux = session.receive()
-            .flatMap { msg ->
-                lastSeen.set(System.currentTimeMillis())
-                val payload = msg.payloadAsText
+    clean: () => initialState,
+  },
+});
 
-                try {
-                    val wsMessage = payload.parseJson<WsMessage>()
+export const { connect, openSocket, closeSocket, setError, pong, setMessages, clean } =
+  userNotificationsSlice.actions;
+export const userNotificationsSliceReducer = userNotificationsSlice.reducer;
 
-                    when (wsMessage.type) {
-                        WsMessage.Type.PING -> {
-                            log.debug("Received ping from {}", session.id)
-                            Mono.empty<Void>()
-                        }
+import { IUserNotificationsSliceSchema } from "./types";
 
-                        WsMessage.Type.SUBSCRIBE -> {
-                            val filterMap = wsMessage.data as? Map<*, *> ?: throw FrontException("Некорректные данные в сообщении SUBSCRIBE")
-                            val filter = SubscriptionFilter(
-                                dateFrom = LocalDateTime.parse(filterMap["dateFrom"] as String),
-                                dateTo = (filterMap["dateTo"] as? String)
-                                    ?.takeIf { it.isNotBlank() }
-                                    ?.let { LocalDateTime.parse(it) },
-                                login = (filterMap["login"] as? String?)?.takeIf { it.isNotBlank() }
-                            )
-
-                            val historical = mono {
-                                auditDao.filter(filter.dateFrom, filter.dateTo, filter.login)
-                            }.flatMapMany { historicalEvents ->
-                                if (historicalEvents.isNotEmpty()) {
-                                    Flux.fromIterable(historicalEvents.chunked(100))
-                                        .flatMap { batch ->
-                                            val msgText = WsMessage.data(batch).toJson()
-                                            session.send(Mono.just(session.textMessage(msgText)))
-                                        }
-                                } else {
-                                    Flux.empty<WebSocketMessage>()
-                                }
-                            }
-
-                            // 2️⃣ подписываем клиента на новые
-                            val live = Flux.create<AuditEvent> { sink ->
-                                BroadcastRegistry.register(session.id, filter, sink)
-                            }
-
-                            Flux.concat(
-                                historical,
-                                live.flatMap { event ->
-                                    val msg = WsMessage.data(listOf(event)).toJson()
-                                    session.send(Mono.just(session.textMessage(msg)))
-                                }
-                            )
-                        }
-
-                        else -> {
-                            log.warn("Unknown WS message type: {}", wsMessage.type)
-                            val err = WsMessage.error("Неизвестный тип: ${wsMessage.type}")
-                            session.send(Mono.just(session.textMessage(err.toJson()))).then()
-                        }
-                    }
-                } catch (e: Exception) {
-                    log.error("Ошибка при обработке WS-сообщения: {}", e.message)
-                    val errorMsg = WsMessage.error("Некорректные данные: ${e.message}")
-                    session.send(Mono.just(session.textMessage(errorMsg.toJson()))).then()
-                }
-            }
-            .doFinally { signal ->
-                log.info("Closing WS connection: {} by {}", session.id, signal)
-                BroadcastRegistry.unregister(session.id)
-            }
-
-        // Heartbeat: только отправка ping + проверка таймаута
-        val heartbeatFlux = heartbeat(lastSeen, session)
-
-        return Flux.merge(receiveFlux, heartbeatFlux).then()
-    }
-
-    fun broadcast(event: AuditEvent) {
-        BroadcastRegistry.publish(event)
-    }
-
-    fun heartbeat(lastSeen: AtomicLong, session: WebSocketSession): Flux<WebSocketMessage> =
-        Flux.interval(Duration.ofSeconds(180))
-            .flatMap {
-                val now = System.currentTimeMillis()
-                if (now - lastSeen.get() >= 600_000) {
-                    log.warn("Session {} did not respond to heartbeat. Closing.", session.id)
-                    BroadcastRegistry.unregister(session.id)
-                    session.close().subscribe()
-                    Mono.empty<WebSocketMessage>()
-                } else {
-                    val ping = session.textMessage(WsMessage.ping().toJson())
-                    session.send(Mono.just(ping))
-                        .doOnError { e ->
-                            log.warn("Failed to send ping to {}: {}", session.id, e.message)
-                            BroadcastRegistry.unregister(session.id)
-                            session.close().subscribe()
-                        }
-                        .subscribe()
-                    Mono.just(ping)
-                }
-            }
-}
+export const userNotificationsInitialState : IUserNotificationsSliceSchema = {
+  messages: [],
+  connected: false,
+  error: '',
+};
