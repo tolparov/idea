@@ -1,11 +1,8 @@
-private suspend fun enrichRecordsWithFio(records: List<FraudRecord>): List<FraudRecord> {
-    if (records.isEmpty()) return records
+/api/frontend-logs
 
-    return records.map { record ->
-        if (!record.login.isNullOrBlank() && record.login.all { it.isDigit() }) {
-            record.copy(login = userInfoProvider.getFioByUsername(record.login))
-        } else {
-            record
-        }
-    }
+{
+	message: string,
+	stackTrace?: string,
+	componentStack?: string,
+	level: string, // 'ERROR'
 }
