@@ -1,8 +1,53 @@
-/api/frontend-logs
+data class FrontendLogRequest(
+    @field:NotBlank
+    val message: String,
 
-{
-	message: string,
-	stackTrace?: string,
-	componentStack?: string,
-	level: string, // 'ERROR'
+    val stackTrace: String? = null,
+
+    val componentStack: String? = null,
+
+    @field:NotBlank
+    val level: String,
+)
+
+@RestController
+@RequestMapping("/api/frontend-logs")
+class FrontendLogController(
+    private val frontendLogRepository: FrontendLogRepository,
+) {
+
+    @PostMapping
+    fun create(
+        @Valid @RequestBody request: FrontendLogRequest,
+        httpRequest: HttpServletRequest,
+        @AuthenticationPrincipal user: UserPrincipal?, // подставь свой тип
+    ): ResponseEntity<Void> {
+        frontendLogRepository.save(
+            FrontendLog(
+                message = request.message,
+                stackTrace = request.stackTrace,
+                componentStack = request.componentStack,
+                level = request.level,
+                userId = user?.id,
+                userAgent = httpRequest.getHeader("User-Agent"),
+            )
+        )
+        return ResponseEntity.status(HttpStatus.CREATED).build()
+    }
 }
+
+-- V{next}__create_frontend_log_table.sql
+
+CREATE TABLE frontend_log (
+    id          BIGSERIAL PRIMARY KEY,
+    message     TEXT        NOT NULL,
+    stack_trace TEXT,
+    component_stack TEXT,
+    level       VARCHAR(50) NOT NULL,
+    user_id     BIGINT,
+    user_agent  TEXT,
+    created_at  TIMESTAMP   NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_frontend_log_created_at ON frontend_log (created_at);
+CREATE INDEX idx_frontend_log_level ON frontend_log (level);
