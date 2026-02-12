@@ -1,53 +1,147 @@
-data class FrontendLogRequest(
-    @field:NotBlank
-    val message: String,
+package ru.sber.poirot.links.service.delayer
 
-    val stackTrace: String? = null,
+import ru.sber.poirot.engine.dictionaries.metamodel.changesDictLog
+import ru.sber.poirot.engine.ds.refreshable.Delayer
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.ChannelDelayerFactory.kafkaDelayer
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.ChannelDelayerFactory.versionFetcherKafkaDelayer
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.kafkaTriggerNames
+import ru.sber.poirot.engine.ds.refreshable.delayers.versionDelayer
+import ru.sber.poirot.engine.dsl.*
+import ru.sber.poirot.engine.dsl.Order.DESC
+import ru.sber.poirot.engine.dsl.queries.batch.select.jdbc.database
+import java.time.LocalDateTime
 
-    val componentStack: String? = null,
+fun ifUpdated(vararg tables: MetaModel<*>): Delayer =
+    versionDelayer(emptyList(), tables.toList(), ::selectTableVersionEverywhere)
 
-    @field:NotBlank
-    val level: String,
+fun ifUpdatedKafka(refreshableName: String, vararg triggerMMs: MetaModel<*>): Delayer =
+    kafkaDelayer(refreshableName, triggerMMs.toList().kafkaTriggerNames())
+
+fun ifUpdatedKafkaOrVersionEverywhere(
+    refreshableName: String,
+    tables: List<MetaModel<*>>,
+    vararg triggerMMs: MetaModel<*>,
+): Delayer = versionFetcherKafkaDelayer(
+    refreshableName,
+    triggerMMs.toList().kafkaTriggerNames(),
+    emptyList(),
+    tables,
+    versionFetcher = ::selectTableVersionEverywhere
 )
 
-@RestController
-@RequestMapping("/api/frontend-logs")
-class FrontendLogController(
-    private val frontendLogRepository: FrontendLogRepository,
-) {
+suspend fun selectTableVersionEverywhere(t: MetaModel<*>): Pair<Long?, LocalDateTime?> {
 
-    @PostMapping
-    fun create(
-        @Valid @RequestBody request: FrontendLogRequest,
-        httpRequest: HttpServletRequest,
-        @AuthenticationPrincipal user: UserPrincipal?, // подставь свой тип
-    ): ResponseEntity<Void> {
-        frontendLogRepository.save(
-            FrontendLog(
-                message = request.message,
-                stackTrace = request.stackTrace,
-                componentStack = request.componentStack,
-                level = request.level,
-                userId = user?.id,
-                userAgent = httpRequest.getHeader("User-Agent"),
-            )
-        )
-        return ResponseEntity.status(HttpStatus.CREATED).build()
+    val fpvd = selectTableVersionFpvd(t)
+    val poirot = selectTableVersionDictionary(t)
+    return fpvd to poirot
+}
+
+suspend fun selectTableVersionFpvd(t: MetaModel<*>): Long? {
+    val (scheme, tableName) = t.tableName().lowercase().split(".")
+    val wId = field<Long>("stg_cib.table_log.workflow_run_id", t.database())
+    return findFirst(wId, orderBy = listOf(wId), order = DESC, batch = false) join {
+        field<Long>("stg_cib.workflow_log.workflow_run_id") `=` this
+    } where {
+        field<String>("stg_cib.workflow_log.result_code") `=` "SUCCESS".inlined
+        field<String>("stg_cib.table_log.result_code") `=` "SUCCESS".inlined
+        field<String>("stg_cib.table_log.schema_name") `=` scheme
+        field<String>("stg_cib.table_log.table_name") `=` tableName
     }
 }
 
--- V{next}__create_frontend_log_table.sql
+suspend fun selectTableVersionDictionary(t: MetaModel<*>): LocalDateTime? {
+    val (scheme, tableName) = t.tableName().lowercase().split(".")
+    if (scheme != "re_dictionaries")
+        return null
+    return findFirst(changesDictLog.dateTime, orderBy = listOf(changesDictLog.dateTime), order = DESC, batch = false) where {
+        changesDictLog.dictName `=` tableName
+    }
+}
 
-CREATE TABLE frontend_log (
-    id          BIGSERIAL PRIMARY KEY,
-    message     TEXT        NOT NULL,
-    stack_trace TEXT,
-    component_stack TEXT,
-    level       VARCHAR(50) NOT NULL,
-    user_id     BIGINT,
-    user_agent  TEXT,
-    created_at  TIMESTAMP   NOT NULL DEFAULT now()
-);
+package ru.sber.poirot.engine.ds.refreshable.delayers.channel
 
-CREATE INDEX idx_frontend_log_created_at ON frontend_log (created_at);
-CREATE INDEX idx_frontend_log_level ON frontend_log (level);
+import ru.sber.poirot.engine.ds.refreshable.Delayer
+import ru.sber.poirot.engine.ds.refreshable.Refreshable
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.ChannelConsumeStrategy.KAFKA
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.ChannelConsumeStrategy.SSE_NODE
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.EventType.DEFAULT
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaDelayerReceptionist
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaUpdateEvent
+import ru.sber.poirot.engine.ds.refreshable.delayers.node.CacheUpdateDelayerReceptionist
+import ru.sber.poirot.engine.ds.refreshable.delayers.node.CacheUpdateEvent
+import ru.sber.poirot.engine.ds.refreshable.delayers.shouldUpdate
+import ru.sber.poirot.engine.ds.refreshable.delayers.withPostponeSupport
+import ru.sber.poirot.engine.dsl.MetaModel
+import java.time.LocalDateTime.now
+import java.util.UUID.randomUUID
+
+object ChannelDelayerFactory {
+    private val kafkaPredicatePublisher: (String) -> KafkaUpdateEvent =
+        { KafkaUpdateEvent(randomUUID().toString(), now(), it) }
+
+    fun sseCacheNodeDelayer(
+        refreshableName: String,
+        bufferTimeoutMs: Long = 500
+    ): Delayer = SSE_NODE
+        .bufferTimeoutChannelDelayer<CacheUpdateEvent>(refreshableName, bufferTimeoutMs)
+        .also { CacheUpdateDelayerReceptionist.register(refreshableName, it) }
+        .withPostponeSupport()
+
+    fun kafkaDelayer(
+        refreshableName: String,
+        triggerNames: List<String>,
+        forceUpdateEveryMin: Long = 60 * 12,
+        bufferTimeoutMs: Long = 3000
+    ): Delayer = "${refreshableName}_timeout".let { forceTriggerName ->
+        KAFKA.predicateBufferTimeoutChannelDelayer(
+            refreshableName = refreshableName,
+            forceUpdateEveryMin = forceUpdateEveryMin,
+            checkDelayInMin = 3,
+            bufferTimeoutMs = bufferTimeoutMs,
+            publisher = { kafkaPredicatePublisher(forceTriggerName) }
+        ).also {
+            KafkaDelayerReceptionist.register(refreshableName, triggerNames.plus(forceTriggerName), it)
+        }.withPostponeSupport()
+    }
+
+    fun versionFetcherKafkaDelayer(
+        refreshableName: String,
+        triggerNames: List<String>,
+        refreshables: List<Refreshable>,
+        tables: List<MetaModel<*>>,
+        forceUpdateEveryMin: Long = 60 * 12,
+        bufferTimeoutMs: Long = 3000,
+        versionFetcher: suspend (MetaModel<*>) -> Any?
+    ): Delayer {
+        val entityToVersion = HashMap<Any, Any?>()
+
+        return predicateKafkaDelayer(
+            refreshableName,
+            triggerNames,
+            forceUpdateEveryMin,
+            bufferTimeoutMs
+        ) {
+            shouldUpdate(refreshables, { it.version }, entityToVersion) or
+                    shouldUpdate(tables, versionFetcher, entityToVersion)
+        }
+    }
+
+    private fun predicateKafkaDelayer(
+        refreshableName: String,
+        triggerNames: List<String>,
+        forceUpdateEveryMin: Long = 60 * 12,
+        bufferTimeoutMs: Long = 3000,
+        shouldUpdate: suspend () -> Boolean
+    ): Delayer = "${refreshableName}_predicate_or_timeout".let { forceTriggerName ->
+        KAFKA.predicateBufferTimeoutChannelDelayer(
+            refreshableName = refreshableName,
+            checkDelayInMin = 3,
+            forceUpdateEveryMin = forceUpdateEveryMin,
+            bufferTimeoutMs = bufferTimeoutMs,
+            shouldUpdate = shouldUpdate,
+            publisher = { KafkaUpdateEvent(randomUUID().toString(), now(), forceTriggerName, DEFAULT) }
+        ).also {
+            KafkaDelayerReceptionist.register(refreshableName, triggerNames.plus(forceTriggerName), it)
+        }.withPostponeSupport()
+    }
+}
