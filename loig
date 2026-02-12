@@ -1,104 +1,11 @@
-package ru.sber.poirot.fraud.fetch
+private suspend fun enrichRecordsWithFio(records: List<FraudRecord>): List<FraudRecord> {
+    if (records.isEmpty()) return records
 
-import org.springframework.stereotype.Service
-import ru.sber.poirot.fraud.FraudRecord
-import ru.sber.poirot.fraud.controller.FraudHistoryRequest
-import ru.sber.poirot.fraud.controller.FraudRequest
-import ru.sber.poirot.fraud.controller.FraudResponse
-import ru.sber.poirot.fraud.controller.toResponses
-import ru.sber.poirot.fraud.dao.FraudDao
-import ru.sber.poirot.fraud.recordIds
-import ru.sber.poirot.helpers.dictionaries.fraud.FraudRegistryType.LE_APP
-import ru.sber.poirot.helpers.dictionaries.fraud.FraudRegistryType.LE_CLIENT
-import ru.sber.poirot.fraud.dictionaries.enums.FraudRegistryTypeExt
-import ru.sber.poirot.order345.MarkedEntitiesSearchResult
-import ru.sber.poirot.order345.Order345
-import ru.sber.poirot.paging.forPageWith
-import ru.sber.poirot.userinfoprovider.UserInfoProvider
-
-@Service
-class FraudFetcherImpl(
-    private val fraudDao: FraudDao,
-    private val order345: Order345,
-    private val userInfoProvider: UserInfoProvider
-) : FraudFetcher {
-    override suspend fun fetch(request: FraudRequest): FraudResponse {
-        val infos = fraudDao.fetchInfos(request)
-        val pagedInfos = infos.forPageWith(request.offset, request.rowsOnPage)
-        val recordIds = pagedInfos.recordIds()
-
-        val result: MarkedEntitiesSearchResult<FraudRecord> = when {
-            recordIds.isNotEmpty() -> order345.searchNotMarkedEntities(
-                findEntities = { fraudDao.fetch(pagedInfos.recordIds()) },
-                isMarkedEntity = { isMarkedClient(it.key, it.type) },
-                limit = pagedInfos.size
-            )
-            else -> MarkedEntitiesSearchResult(false)
-        }
-        val records = result.entities
-
-        val enrichedRecords = enrichRecordsWithSegments(records)
-
-        val filteredRecords =
-            request.segment?.let { segment ->
-                enrichedRecords.filter { it.segment == segment }
-            } ?: enrichedRecords
-
-        return filteredRecords.toResponses(infos.size, result.excludeMarkedEntities)
-    }
-
-    override suspend fun fetchHistory(request: FraudHistoryRequest): FraudResponse {
-        val infos = fraudDao.fetchHistoryInfos(request)
-        val pagedInfos = infos.forPageWith(request.offset, request.rowsOnPage)
-        val recordIds = pagedInfos.recordIds()
-
-        val histories = when {
-            recordIds.isNotEmpty() -> fraudDao.fetchHistory(recordIds)
-            else -> emptyList()
-        }
-
-        return histories.toResponses(infos.size, false)
-    }
-
-    private fun isMarkedClient(key: String, type: String): Boolean =
-        when (FraudRegistryTypeExt.getByValue(type)) {
-            LE_CLIENT -> order345.isMarkedClientInn(key)
-            LE_APP -> order345.isMarkedAppId(key)
-            else -> false
-        }
-
-    private suspend fun enrichRecordsWithSegments(records: List<FraudRecord>): List<FraudRecord> {
-        if (records.isEmpty()) return records
-
-        val innList = records
-            .filter { it.type == LE_CLIENT.type }
-            .mapNotNull { it.keyNoApp }
-            .distinct()
-
-        if (innList.isEmpty()) return records
-
-        val segmentMap = fraudDao.fetchClientSegments(innList)
-
-        return records.map { record ->
-            if (record.type == LE_CLIENT.type && record.keyNoApp != null) {
-                val segment = segmentMap[record.keyNoApp]
-                record.copy(segment = segment)
-            } else {
-                record
-            }
-        }
-    }
-
-    private suspend fun enrichRecordsWithFio(records: List<FraudRecord>): List<FraudRecord> {
-        if (records.isEmpty()) return records
-        
-        return records.map { record ->
-            if (record.login.isNullOrBlank()) {
-                if (record.login?.all { it.isDigit() } == true)
-                        record.copy(login = userInfoProvider.getFioByUsername(record.login)
-            } else {
-                record
-            }
+    return records.map { record ->
+        if (!record.login.isNullOrBlank() && record.login.all { it.isDigit() }) {
+            record.copy(login = userInfoProvider.getFioByUsername(record.login))
+        } else {
+            record
         }
     }
 }
