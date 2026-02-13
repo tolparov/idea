@@ -1,11 +1,25 @@
-try {
-                    val kafkaEvent = KafkaUpdateEvent(
-                        id = record.offset().toString(),
-                        timestamp = LocalDateTime.now(),
-                        triggerName = key  // ← Ключ из Kafka
-                    )
-                    KafkaDelayerReceptionist.notify(kafkaEvent)
-                    log.debug("🔄 Cache refresh triggered by key: {}", key)
-                } catch (e: Exception) {
-                    log.warn("⚠️ Failed to notify KafkaDelayerReceptionist: {}", e.message)
-                }
+package ru.sber.poirot.engine.ds.refreshable.delayers.kafka
+
+import ru.sber.poirot.engine.ds.refreshable.delayers.channel.BufferTimeoutChannelDelayer
+import ru.sber.utils.logger
+import java.util.concurrent.ConcurrentHashMap
+
+object KafkaDelayerReceptionist {
+    private val log = logger()
+    private val delayersByTriggerName =
+        ConcurrentHashMap<String, ArrayList<BufferTimeoutChannelDelayer<KafkaUpdateEvent>>>()
+
+    fun register(
+        refreshableName: String,
+        triggerNames: List<String>,
+        delayer: BufferTimeoutChannelDelayer<KafkaUpdateEvent>
+    ) {
+        triggerNames.distinct().forEach {
+            delayersByTriggerName.merge(it, arrayListOf(delayer)) { old, new -> old.apply { addAll(new) } }
+        }
+        log.info("Registered kafka delayer for triggerNames=$triggerNames, refreshable=$refreshableName")
+    }
+
+    operator fun get(triggerName: String): List<BufferTimeoutChannelDelayer<KafkaUpdateEvent>> =
+        delayersByTriggerName[triggerName] ?: emptyList()
+}
