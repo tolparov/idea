@@ -1,65 +1,11 @@
-package ru.sber.poirot.notifications.kafka
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.stereotype.Component
-import ru.sber.kafka.producer.MetricsKafkaProducer
-import ru.sber.utils.logger
-
-@Component
-@ConditionalOnProperty(value = ["spring.kafka.producer.notification.enable"], havingValue = "true")
-class NotificationProducer(
-    private val kafkaProducer: MetricsKafkaProducer<String, NotificationEvent>
-) {
-    private val log = logger()
-    
-    companion object {
-        // ✅ Константы для ключей триггера кеша
-        private const val TRIGGER_CREATED = "notification.created"
-        private const val TRIGGER_UPDATED = "notification.updated"
-        private const val TRIGGER_ARCHIVED = "notification.archived"
-    }
-    
-    private suspend fun sendEvent(event: NotificationEvent, triggerKey: String) {
-        try {
-            log.info("📤 Sending notification event to Kafka: type={}, id={}, key={}",
-                event.type, event.notificationId, triggerKey)
-            
-            kafkaProducer.send(
-                event = event,
-                key = triggerKey,  // ✅ Используем триггер-ключ вместо ID!
-                onCompleteAlways = { e, throwable ->
-                    if (throwable != null) {
-                        log.error("❌ Failed to send notification event to Kafka: {}",
-                            throwable.message, throwable)
-                    } else {
-                        log.debug("✅ Notification event sent to Kafka: type={}, id={}",
-                            e.type, e.notificationId)
-                    }
+try {
+                    val kafkaEvent = KafkaUpdateEvent(
+                        id = record.offset().toString(),
+                        timestamp = LocalDateTime.now(),
+                        triggerName = key  // ← Ключ из Kafka
+                    )
+                    KafkaDelayerReceptionist.notify(kafkaEvent)
+                    log.debug("🔄 Cache refresh triggered by key: {}", key)
+                } catch (e: Exception) {
+                    log.warn("⚠️ Failed to notify KafkaDelayerReceptionist: {}", e.message)
                 }
-            )
-        } catch (e: Exception) {
-            log.error("❌ Error sending notification event to Kafka: {}", e.message, e)
-        }
-    }
-    
-    suspend fun sendCreated(notificationId: Long) {
-        sendEvent(
-            NotificationEvent(NotificationEvent.EventType.CREATED, notificationId),
-            TRIGGER_CREATED  // ✅ Ключ для триггера кеша
-        )
-    }
-    
-    suspend fun sendUpdated(notificationId: Long) {
-        sendEvent(
-            NotificationEvent(NotificationEvent.EventType.UPDATED, notificationId),
-            TRIGGER_UPDATED  // ✅ Ключ для триггера кеша
-        )
-    }
-    
-    suspend fun sendArchived(notificationId: Long) {
-        sendEvent(
-            NotificationEvent(NotificationEvent.EventType.ARCHIVED, notificationId),
-            TRIGGER_ARCHIVED  // ✅ Ключ для триггера кеша
-        )
-    }
-}
