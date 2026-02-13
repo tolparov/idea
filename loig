@@ -1,25 +1,107 @@
-package ru.sber.poirot.engine.ds.refreshable.delayers.kafka
+package ru.sber.poirot.notifications.kafka
 
-import ru.sber.poirot.engine.ds.refreshable.delayers.channel.BufferTimeoutChannelDelayer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.kafka.annotation.KafkaListener
+import org.springframework.kafka.support.Acknowledgment
+import org.springframework.stereotype.Component
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaDelayerReceptionist
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaUpdateEvent
+import ru.sber.poirot.notifications.admin.AdminNotifications
+import ru.sber.poirot.notifications.websocket.BroadcastRegistry
+import ru.sber.poirot.utils.parseJson
 import ru.sber.utils.logger
-import java.util.concurrent.ConcurrentHashMap
+import java.time.LocalDateTime
+import java.util.UUID
 
-object KafkaDelayerReceptionist {
+@Component
+@ConditionalOnProperty(value = ["spring.kafka.consumer.notification.enable"], havingValue = "true")
+class NotificationConsumer(
+    private val adminNotifications: AdminNotifications
+) {
     private val log = logger()
-    private val delayersByTriggerName =
-        ConcurrentHashMap<String, ArrayList<BufferTimeoutChannelDelayer<KafkaUpdateEvent>>>()
+    private val scope = CoroutineScope(Dispatchers.Default)
 
-    fun register(
-        refreshableName: String,
-        triggerNames: List<String>,
-        delayer: BufferTimeoutChannelDelayer<KafkaUpdateEvent>
+    @KafkaListener(
+        topics = ["\${kafka.consumer.topic}"],
+        groupId = "\${spring.kafka.consumer.group-id}"
+    )
+    fun consumeNotificationEvent(
+        record: ConsumerRecord<String, String>,
+        acknowledgment: Acknowledgment
     ) {
-        triggerNames.distinct().forEach {
-            delayersByTriggerName.merge(it, arrayListOf(delayer)) { old, new -> old.apply { addAll(new) } }
+        scope.launch {
+            try {
+                val event = record.value().parseJson<NotificationEvent>()
+                val key = record.key() ?: ""
+
+                log.info("📨 Received notification event from Kafka: type={}, id={}, key={}",
+                    event.type, event.notificationId, key)
+
+                // ✅ ТРИГГЕРИМ ОБНОВЛЕНИЕ КЕША!
+                if (key.isNotEmpty()) {
+                    triggerCacheRefresh(key)
+                }
+
+                // Обработка события для WebSocket
+                when (event.type) {
+                    NotificationEvent.EventType.CREATED,
+                    NotificationEvent.EventType.UPDATED -> {
+                        handleCreatedOrUpdated(event.notificationId)
+                    }
+                    NotificationEvent.EventType.ARCHIVED -> {
+                        handleArchived(event.notificationId)
+                    }
+                }
+
+                acknowledgment.acknowledge()
+
+            } catch (e: Exception) {
+                log.error("❌ Error processing notification event from Kafka: {}", e.message, e)
+            }
         }
-        log.info("Registered kafka delayer for triggerNames=$triggerNames, refreshable=$refreshableName")
     }
 
-    operator fun get(triggerName: String): List<BufferTimeoutChannelDelayer<KafkaUpdateEvent>> =
-        delayersByTriggerName[triggerName] ?: emptyList()
+    private suspend fun triggerCacheRefresh(key: String) {
+        try {
+            val delayers = KafkaDelayerReceptionist.get(key)
+            
+            if (delayers.isNotEmpty()) {
+                val kafkaEvent = KafkaUpdateEvent(
+                    id = UUID.randomUUID().toString(),
+                    timestamp = LocalDateTime.now(),
+                    triggerName = key
+                )
+                
+                // ✅ ИСПОЛЬЗУЕМ offer() - это suspend функция!
+                delayers.forEach { delayer ->
+                    delayer.offer(kafkaEvent)
+                }
+                
+                log.debug("🔄 Triggered {} delayer(s) for key: {}", delayers.size, key)
+            } else {
+                log.debug("⚠️ No delayers registered for key: {}", key)
+            }
+        } catch (e: Exception) {
+            log.warn("⚠️ Failed to trigger cache refresh for key {}: {}", key, e.message)
+        }
+    }
+
+    private suspend fun handleCreatedOrUpdated(notificationId: Long) {
+        try {
+            val notification = adminNotifications.fetchById(notificationId)
+            BroadcastRegistry.publish(notification)
+            log.info("📢 Broadcasting notification {} to clients on this pod", notificationId)
+        } catch (e: Exception) {
+            log.error("❌ Error handling notification {}: {}", notificationId, e.message, e)
+        }
+    }
+
+    private suspend fun handleArchived(notificationId: Long) {
+        BroadcastRegistry.removeNotification(notificationId)
+        log.info("🗑️ Removed notification {} from all clients", notificationId)
+    }
 }
