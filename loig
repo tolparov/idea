@@ -1,24 +1,70 @@
-kafka:
-    bootstrap-servers: ***************************
-    topic: INTERNAL.CACHE_UPDATES
-    consumer:
-      auto-offset-reset: earliest
-      enable: true
-      enable-auto-commit: false
-      group-id: notifications-caches-ift-as-pkap
-      max-poll-records: 1
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      notification:
-        enable: true
-    listener:
-      ack-mode: MANUAL_IMMEDIATE
-      async-acks: true
-    producer:
-      acks: 1
-      enable: true
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      notification:
-        enable: true
-    properties:
-      security:
-        protocol: PLAINTEXT
+package ru.sber.poirot.notifications.kafka
+
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.kafka.annotation.KafkaListener
+import org.springframework.stereotype.Component
+import ru.sber.parseJson
+import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaUpdateEvent
+import ru.sber.poirot.notifications.admin.dto.toFeedResponse
+import ru.sber.poirot.notifications.admin.impl.AdminNotificationsDao
+import ru.sber.poirot.notifications.websocket.BroadcastRegistry
+import ru.sber.utils.logger
+
+@Component
+@ConditionalOnProperty(value = ["spring.kafka.consumer.notification.enable"], havingValue = "true")
+class WebSocketCacheConsumer(
+    private val adminNotificationsDao: AdminNotificationsDao
+) {
+    private val log = logger()
+    private val scope = CoroutineScope(Dispatchers.Default)
+
+    @KafkaListener(
+        topics = ["\${spring.kafka.topic}"],
+        groupId = "\${spring.kafka.consumer.group-id}"
+    )
+    fun consumeNotificationEvent(
+        record: ConsumerRecord<String, String>
+    ) {
+        scope.launch {
+            try {
+                val notificationId = record.key().toLongOrNull()
+                val event = record.value().parseJson<KafkaUpdateEvent>()
+
+                log.info("📨 Received cache update for WebSocket: id={}", notificationId)
+
+                if (notificationId == null) {
+                    log.warn("⚠️ Invalid notification ID in event: {}", event.uuid)
+                    return@launch
+                }
+
+                processNotification(notificationId)
+
+            } catch (e: Exception) {
+                log.error("❌ Error processing cache update: {}", e.message, e)
+            }
+        }
+    }
+
+    private suspend fun processNotification(notificationId: Long) {
+        try {
+            val notification = adminNotificationsDao.fetchById(notificationId)
+
+            if (notification.archive) {
+                log.info("🗑️ Notification {} is archived, removing from clients", notificationId)
+                BroadcastRegistry.removeNotification(notificationId)
+            } else {
+                val feedResponse = notification.toFeedResponse()
+                log.info("📢 Broadcasting notification {} to clients (archive={})",
+                    notificationId, notification.archive)
+                BroadcastRegistry.publish(listOf(feedResponse))
+            }
+
+        } catch (e: Exception) {
+            log.error("❌ Error processing notification {}: {}", notificationId, e.message, e)
+        }
+    }
+}
