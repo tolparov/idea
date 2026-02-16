@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.kafka.annotation.KafkaListener
+import org.springframework.kafka.support.Acknowledgment
 import org.springframework.stereotype.Component
 import ru.sber.parseJson
 import ru.sber.poirot.engine.ds.refreshable.delayers.kafka.KafkaUpdateEvent
@@ -15,36 +16,58 @@ import ru.sber.poirot.notifications.websocket.BroadcastRegistry
 import ru.sber.utils.logger
 
 @Component
-@ConditionalOnProperty(value = ["spring.kafka.consumer.notification.enable"], havingValue = "true")
+@ConditionalOnProperty(
+    value = ["spring.kafka.consumer.notification.enable"], 
+    havingValue = "true",
+    matchIfMissing = false
+)
 class WebSocketCacheConsumer(
     private val adminNotificationsDao: AdminNotificationsDao
 ) {
     private val log = logger()
     private val scope = CoroutineScope(Dispatchers.Default)
 
+    companion object {
+        private const val TRIGGER_NAME = "admin_notifications"  // ← КОНСТАНТА!
+    }
+
     @KafkaListener(
         topics = ["\${spring.kafka.topic}"],
-        groupId = "\${spring.kafka.consumer.group-id}"
+        groupId = "\${spring.kafka.consumer.group-id}-websocket"
     )
     fun consumeNotificationEvent(
-        record: ConsumerRecord<String, String>
+        record: ConsumerRecord<String, String>,
+        acknowledgment: Acknowledgment
     ) {
         scope.launch {
             try {
-                val notificationId = record.key().toLongOrNull()
                 val event = record.value().parseJson<KafkaUpdateEvent>()
+                
+                // ✅ ФИЛЬТР ПО triggerName!
+                if (event.triggerName != TRIGGER_NAME) {
+                    log.debug("Skipping event with triggerName={}, expected={}", 
+                        event.triggerName, TRIGGER_NAME)
+                    acknowledgment.acknowledge()
+                    return@launch
+                }
 
+                val notificationId = record.key().toLongOrNull()
                 log.info("📨 Received cache update for WebSocket: id={}", notificationId)
 
                 if (notificationId == null) {
                     log.warn("⚠️ Invalid notification ID in event: {}", event.uuid)
+                    acknowledgment.acknowledge()
                     return@launch
                 }
 
                 processNotification(notificationId)
+                
+                acknowledgment.acknowledge()
+                log.debug("✅ Acknowledged message with id={}", notificationId)
 
             } catch (e: Exception) {
                 log.error("❌ Error processing cache update: {}", e.message, e)
+                acknowledgment.acknowledge()
             }
         }
     }
@@ -52,13 +75,19 @@ class WebSocketCacheConsumer(
     private suspend fun processNotification(notificationId: Long) {
         try {
             val notification = adminNotificationsDao.fetchById(notificationId)
+            
+            if (notification == null) {
+                log.info("🗑️ Notification {} not found, removing from clients", notificationId)
+                BroadcastRegistry.removeNotification(notificationId)
+                return
+            }
 
             if (notification.archive) {
                 log.info("🗑️ Notification {} is archived, removing from clients", notificationId)
                 BroadcastRegistry.removeNotification(notificationId)
             } else {
                 val feedResponse = notification.toFeedResponse()
-                log.info("📢 Broadcasting notification {} to clients (archive={})",
+                log.info("📢 Broadcasting notification {} to clients (archive={})", 
                     notificationId, notification.archive)
                 BroadcastRegistry.publish(listOf(feedResponse))
             }
