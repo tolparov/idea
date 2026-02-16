@@ -367,3 +367,184 @@ order by adminNotification_0.last_modified desc
 2026-02-16T11:43:17.283+03:00  INFO 86828 --- [ntainer#1-0-C-1] o.a.k.c.c.internals.SubscriptionState    : [Consumer clientId=consumer-notifications-caches-ift-as-pkap-2, groupId=notifications-caches-ift-as-pkap] Resetting offset for partition INTERNAL.CACHE_UPDATES-4 to position FetchPosition{offset=61, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[tsldq-puaro0001.cloud.delta.sbrf.ru:9092 (id: 2 rack: null)], epoch=18}}.
 2026-02-16T11:43:17.283+03:00  INFO 86828 --- [ntainer#1-0-C-1] o.a.k.c.c.internals.SubscriptionState    : [Consumer clientId=consumer-notifications-caches-ift-as-pkap-2, groupId=notifications-caches-ift-as-pkap] Resetting offset for partition INTERNAL.CACHE_UPDATES-0 to position FetchPosition{offset=5, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[tsldq-puaro0001.cloud.delta.sbrf.ru:9092 (id: 2 rack: null)], epoch=18}}.
 2026-02-16T11:43:17.283+03:00  INFO 86828 --- [ntainer#1-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : notifications-caches-ift-as-pkap: partitions assigned: [INTERNAL.CACHE_UPDATES-0, INTERNAL.CACHE_UPDATES-1, INTERNAL.CACHE_UPDATES-2, INTERNAL.CACHE_UPDATES-3, INTERNAL.CACHE_UPDATES-4, INTERNAL.CACHE_UPDATES-5, INTERNAL.CACHE_UPDATES-6, INTERNAL.CACHE_UPDATES-7, INTERNAL.CACHE_UPDATES-8, INTERNAL.CACHE_UPDATES-9]
+2026-02-16T11:44:22.600+03:00  INFO 86828 --- [ctor-http-nio-2] r.s.p.n.websocket.FeedWebSocketHandler   : New WS connection: 30decc99
+2026-02-16T11:44:24.490+03:00  INFO 86828 --- [ctor-http-nio-2] r.s.p.n.websocket.FeedWebSocketHandler   : Processing SUBSCRIBE for session 30decc99
+2026-02-16T11:44:24.502+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.websocket.FeedWebSocketHandler   : Subscribed session 30decc99 with roles: [1, 2, 3], feed size: 0
+2026-02-16T11:44:24.507+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.websocket.BroadcastRegistry      : ✅ Registered session: 30decc99, roleIds: [1, 2, 3], total clients: 1
+2026-02-16T11:44:34.290+03:00  INFO 86828 --- [atcher-worker-2] r.s.p.audit.impl.RestAuditEventStore     : Would have sent this event to audit-event: AuditEvent(event=NOTIFICATION_CREATE, details=request=(publish=true, dateFrom=2026-02-16T10:00, dateTo=2026-02-16T22:00, type=info, message=test2 Тестовое уведомление #1, roleIds=[1]), info=null, userName=UNKNOWN, userIp=UNKNOWN, date=2026-02-16T11:44:34.287599)
+2026-02-16T11:44:34.510+03:00  INFO 86828 --- [poirot_users-01] r.s.s.p.s.f.VisitorPersisterFactoryImpl  : Generated visitor/persister for AdminNotification in 176 ms.
+2026-02-16T11:44:34.717+03:00  INFO 86828 --- [poirot_users-01] r.s.s.p.s.f.VisitorPersisterFactoryImpl  : Generated visitor/persister for AdminNotificationRoleMapping in 88 ms.
+2026-02-16T11:44:34.843+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationProducer       : 📤 Sending notification event to Kafka: type=CREATED, id=8301
+2026-02-16T11:44:34.862+03:00  INFO 86828 --- [atcher-worker-1] o.a.k.clients.producer.ProducerConfig    : Idempotence will be disabled because acks is set to 1, not set to 'all'.
+2026-02-16T11:44:34.862+03:00  INFO 86828 --- [atcher-worker-1] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	acks = 1
+	auto.include.jmx.reporter = true
+	batch.size = 16384
+	bootstrap.servers = [tsldq-puaro0001.cloud.delta.sbrf.ru:9092, tsldq-puaro0002.cloud.delta.sbrf.ru:9092]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = notifications-producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = false
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 0
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.strategy = none
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = null
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2026-02-16T11:44:34.863+03:00  INFO 86828 --- [atcher-worker-1] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-02-16T11:44:34.880+03:00  INFO 86828 --- [atcher-worker-1] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.9.1
+2026-02-16T11:44:34.880+03:00  INFO 86828 --- [atcher-worker-1] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: f745dfdcee2b9851
+2026-02-16T11:44:34.880+03:00  INFO 86828 --- [atcher-worker-1] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1771231474880
+2026-02-16T11:44:34.995+03:00  INFO 86828 --- [ions-producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=notifications-producer-1] Cluster ID: 3mwehz1QR16bE9BAaNZ2kA
+2026-02-16T11:44:35.006+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.CacheUpdateProducer        : 🔄 Sending cache update: id=8301, topic=INTERNAL.CACHE_UPDATES
+2026-02-16T11:44:35.136+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationConsumer       : 📨 Received notification event from Kafka: type=CREATED, id=8301
+2026-02-16T11:44:35.146+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.e.d.q.b.s.jdbc.JdbcSelectFactory   : GENERATED DSL SQL(2) in 0 ms:
+***
+findAll(adminNotification, limit = 1, batch = false, deduplicate = true) fetchFields { listOf(adminNotification.id, adminNotification.archive, adminNotification.publish, adminNotification.created, adminNotification.lastModified, adminNotification.dateFrom, adminNotification.dateTo, adminNotification.type, adminNotification.message, adminNotification.author, adminNotification.mapping.id, adminNotification.mapping.roleId, adminNotification.mapping.adminNotificationId) } where {
+  adminNotification.id = ?
+}
+SELECT adminNotification_0.id, adminNotification_0.archive, adminNotification_0.publish, adminNotification_0.created, adminNotification_0.last_modified, adminNotification_0.date_from, adminNotification_0.date_to, adminNotification_0.type, adminNotification_0.message, adminNotification_0.author
+from admin_notifications adminNotification_0
+where adminNotification_0.id = ?
+limit 1
+***
+2026-02-16T11:44:35.174+03:00  INFO 86828 --- [ntainer#1-0-C-1] r.s.p.e.d.r.d.k.KafkaCacheKeeperListener : Received cache event={
+  "uuid" : "8301",
+  "eventDt" : "2026-02-16T11:44:35.005+03:00",
+  "triggerName" : "admin_notifications",
+  "eventType" : "KAFKA"
+}
+2026-02-16T11:44:35.210+03:00  INFO 86828 --- [ntainer#1-0-C-1] r.s.p.e.d.r.d.k.KafkaCacheEventHandler   : Event was recognized uuid=8301, triggerName=admin_notifications, refreshables=[NOTIFICATION_FEED]
+2026-02-16T11:44:35.214+03:00  INFO 86828 --- [     refresh-02] .p.e.d.r.d.c.BufferTimeoutChannelDelayer : Start updating refreshable=NOTIFICATION_FEED by received event uuid=8301 with newer eventDt=2026-02-16T11:44:35.005 > currentDt=2026-02-16T11:43:11.840678
+2026-02-16T11:44:35.237+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationConsumer       : 📢 Broadcasting notification 8301 clients on this pod
+2026-02-16T11:44:35.237+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.websocket.BroadcastRegistry      : 📢 Broadcasting 1 notifications to 1 clients
+2026-02-16T11:44:35.296+03:00  INFO 86828 --- [     refresh-02] r.s.p.e.d.r.core.AbstractRefreshable     : Refreshed 'FeedableHolder.NOTIFICATION_FEED'. Fetched 1 items in 0 sec. Size: 0 KB. Versions: 1 -> 2.
+2026-02-16T11:44:46.603+03:00  INFO 86828 --- [atcher-worker-2] r.s.p.audit.impl.RestAuditEventStore     : Would have sent this event to audit-event: AuditEvent(event=NOTIFICATION_ARCHIVE, details=id=8301, info=null, userName=UNKNOWN, userIp=UNKNOWN, date=2026-02-16T11:44:46.603414)
+2026-02-16T11:44:46.811+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationProducer       : 📤 Sending notification event to Kafka: type=ARCHIVED, id=8301
+2026-02-16T11:44:46.812+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.CacheUpdateProducer        : 🔄 Sending cache update: id=8301, topic=INTERNAL.CACHE_UPDATES
+2026-02-16T11:44:46.854+03:00  INFO 86828 --- [ntainer#1-0-C-1] r.s.p.e.d.r.d.k.KafkaCacheKeeperListener : Received cache event={
+  "uuid" : "8301",
+  "eventDt" : "2026-02-16T11:44:46.812+03:00",
+  "triggerName" : "admin_notifications",
+  "eventType" : "KAFKA"
+}
+2026-02-16T11:44:46.854+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationConsumer       : 📨 Received notification event from Kafka: type=ARCHIVED, id=8301
+2026-02-16T11:44:46.854+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.kafka.NotificationConsumer       : 📢 Broadcasting archived notification 8301 clients on this pod
+2026-02-16T11:44:46.854+03:00  INFO 86828 --- [atcher-worker-1] r.s.p.n.websocket.BroadcastRegistry      : 🗑️Removing notification 8301 from 1 clients
+2026-02-16T11:44:46.886+03:00  INFO 86828 --- [ntainer#1-0-C-1] r.s.p.e.d.r.d.k.KafkaCacheEventHandler   : Event was recognized uuid=8301, triggerName=admin_notifications, refreshables=[NOTIFICATION_FEED]
+2026-02-16T11:44:46.887+03:00  INFO 86828 --- [     refresh-02] .p.e.d.r.d.c.BufferTimeoutChannelDelayer : Start updating refreshable=NOTIFICATION_FEED by received event uuid=8301 with newer eventDt=2026-02-16T11:44:46.812 > currentDt=2026-02-16T11:44:35.005
+2026-02-16T11:44:46.917+03:00  INFO 86828 --- [     refresh-02] r.s.p.e.d.r.core.AbstractRefreshable     : Refreshed 'FeedableHolder.NOTIFICATION_FEED'. Fetched 0 items in 0 sec. Size: 0 KB. Versions: 2 -> 3.
+2026-02-16T11:44:50.655+03:00  INFO 86828 --- [ctor-http-nio-4] r.s.p.n.websocket.FeedWebSocketHandler   : New WS connection: 1716351b
+2026-02-16T11:44:51.720+03:00  INFO 86828 --- [ctor-http-nio-4] r.s.p.n.websocket.FeedWebSocketHandler   : Processing SUBSCRIBE for session 1716351b
+2026-02-16T11:44:51.725+03:00  INFO 86828 --- [atcher-worker-2] r.s.p.n.websocket.FeedWebSocketHandler   : Subscribed session 1716351b with roles: [1, 2, 3], feed size: 0
+2026-02-16T11:44:51.725+03:00  INFO 86828 --- [atcher-worker-2] r.s.p.n.websocket.BroadcastRegistry      : ✅ Registered session: 1716351b, roleIds: [1, 2, 3], total clients: 2
+2026-02-16T11:44:52.626+03:00  WARN 86828 --- [     parallel-2] r.s.p.n.websocket.FeedWebSocketHandler   : Failed to send ping to 30decc99: Connection has been closed BEFORE send operation
+2026-02-16T11:44:52.627+03:00  INFO 86828 --- [     parallel-2] r.s.p.n.websocket.BroadcastRegistry      : ❌ Unregistered session: 30decc99, remaining clients: 1
+2026-02-16T11:44:52.633+03:00 ERROR 86828 --- [     parallel-2] reactor.core.publisher.Operators         : Operator called default onErrorDropped
+
+reactor.core.Exceptions$ErrorCallbackNotImplemented: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
+Caused by: reactor.netty.channel.AbortedException: Connection has been closed BEFORE send operation
+	at reactor.netty.channel.AbortedException.beforeSend(AbortedException.java:59) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at reactor.netty.http.server.HttpServerOperations.then(HttpServerOperations.java:691) ~[reactor-netty-http-1.2.10.jar:1.2.10]
+	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:750) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at reactor.netty.ReactorNetty$OutboundThen.<init>(ReactorNetty.java:739) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at reactor.netty.NettyOutbound.then(NettyOutbound.java:358) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at reactor.netty.channel.ChannelOperations.sendObject(ChannelOperations.java:314) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at reactor.netty.NettyOutbound.sendObject(NettyOutbound.java:246) ~[reactor-netty-core-1.2.10.jar:1.2.10]
+	at org.springframework.web.reactive.socket.adapter.ReactorNettyWebSocketSession.send(ReactorNettyWebSocketSession.java:110) ~[spring-webflux-6.2.11.jar:6.2.11]
+	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:126) ~[main/:na]
+	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler$heartbeat$1.invoke(FeedWebSocketHandler.kt:113) ~[main/:na]
+	at ru.sber.poirot.notifications.websocket.FeedWebSocketHandler.heartbeat$lambda$2(FeedWebSocketHandler.kt:113) ~[main/:na]
+	at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:388) ~[reactor-core-3.7.11.jar:3.7.11]
+	at reactor.core.publisher.FluxInterval$IntervalRunnable.run(FluxInterval.java:124) ~[reactor-core-3.7.11.jar:3.7.11]
+	at reactor.core.scheduler.PeriodicWorkerTask.call(PeriodicWorkerTask.java:59) ~[reactor-core-3.7.11.jar:3.7.11]
+	at reactor.core.scheduler.PeriodicWorkerTask.run(PeriodicWorkerTask.java:73) ~[reactor-core-3.7.11.jar:3.7.11]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
