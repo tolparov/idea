@@ -23,54 +23,58 @@ class WebSocketCacheConsumer(
     private val scope = CoroutineScope(Dispatchers.Default)
 
     @KafkaListener(
-        topics = ["\${spring.kafka.topic:}"],
-        groupId = "\${spring.kafka.consumer.group-id}"
+        topics = ["\${spring.kafka.topic}"],
+        groupId = "\${spring.kafka.consumer.group-id}-websocket"
     )
     fun consumeNotificationEvent(
         record: ConsumerRecord<String, String>
     ) {
         scope.launch {
             try {
+                val notificationId = record.key().toLongOrNull()
                 val event = record.value().parseJson<KafkaUpdateEvent>()
+                
+                log.info("📨 Received cache update for WebSocket: id={}", notificationId)
 
-                log.info("📨 Received notification event from Kafka: id={}",
-                    event.uuid)
-
-                when (event.type) {
-                    NotificationEvent.EventType.CREATED,
-                    NotificationEvent.EventType.UPDATED -> {
-                        handleCreatedOrUpdated(event.uuid.toLong())
-                    }
-                    NotificationEvent.EventType.ARCHIVED -> {
-                        handleArchived(event.uuid.toLong())
-                    }
+                if (notificationId == null) {
+                    log.warn("⚠️ Invalid notification ID in event: {}", event.uuid)
+                    return@launch
                 }
+
+                // Загружаем из БД и определяем действие по состоянию
+                processNotification(notificationId)
+
             } catch (e: Exception) {
-                log.error("❌ Error processing notification event from Kafka: {}", e.message, e)
+                log.error("❌ Error processing cache update: {}", e.message, e)
             }
         }
     }
 
-    private suspend fun handleCreatedOrUpdated(notificationId: Long) {
+    private suspend fun processNotification(notificationId: Long) {
         try {
             val notification = adminNotificationsDao.fetchById(notificationId)
-            val feedResponse = notification.toFeedResponse()
+            
+            if (notification == null) {
+                // Не найдено → считаем что архивировано/удалено
+                log.info("🗑️ Notification {} not found, removing from clients", notificationId)
+                BroadcastRegistry.removeNotification(notificationId)
+                return
+            }
 
-            log.info("📢 Broadcasting notification {} clients on this pod",
-                notificationId)
-
-            BroadcastRegistry.publish(listOf(feedResponse))
+            if (notification.archive) {
+                // archive = true → удаляем из WebSocket
+                log.info("🗑️ Notification {} is archived, removing from clients", notificationId)
+                BroadcastRegistry.removeNotification(notificationId)
+            } else {
+                // archive = false → активное уведомление, отправляем в WebSocket
+                val feedResponse = notification.toFeedResponse()
+                log.info("📢 Broadcasting notification {} to clients (archive={})", 
+                    notificationId, notification.archive)
+                BroadcastRegistry.publish(listOf(feedResponse))
+            }
 
         } catch (e: Exception) {
-            log.warn("⚠️ Notification {} not found or not accessible: {}",
-                notificationId, e.message)
+            log.error("❌ Error processing notification {}: {}", notificationId, e.message, e)
         }
-    }
-
-    private suspend fun handleArchived(notificationId: Long) {
-        log.info("📢 Broadcasting archived notification {} clients on this pod",
-            notificationId)
-
-        BroadcastRegistry.removeNotification(notificationId)
     }
 }
